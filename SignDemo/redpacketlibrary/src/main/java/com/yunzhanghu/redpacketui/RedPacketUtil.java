@@ -1,4 +1,4 @@
-package com.yunzhanghu.redpacketlibrary;
+package com.yunzhanghu.redpacketui;
 
 /**
  * Created by Max on 2016/11/14.

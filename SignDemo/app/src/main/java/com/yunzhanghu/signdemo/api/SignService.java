@@ -12,6 +12,6 @@ import retrofit2.http.Query;
 
 public interface SignService {
 
-    @GET("api/sign")
-    Call<SignModel> getSignInfo(@Query("duid") String userId);
+    @GET("api/demo-sign/")
+    Call<SignModel> getSignInfo(@Query("uid") String userId, @Query("token") String token);
 }
