@@ -2,8 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.yunzhanghu.signdemo">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
-        android:name=".MyApplication"
+        android:name=".DemoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,10 +19,64 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.yunzhanghu.redpacketui.ui.activity.RPRedPacketActivity"/>
 
-        <activity android:name="com.yunzhanghu.redpacketui.ui.activity.RPChangeActivity"/>
+        <activity android:name=".ui.DetailActivity"/>
+
+        <!-- 红包相关Activity start -->
+        <!-- 发红包 -->
+        <activity
+            android:name="com.yunzhanghu.redpacketui.ui.activity.RPRedPacketActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateVisible"/>
+        <!-- 红包详情 -->
+        <activity
+            android:name="com.yunzhanghu.redpacketui.ui.activity.RPDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <!-- 红包记录 -->
+        <activity
+            android:name="com.yunzhanghu.redpacketui.ui.activity.RPRecordActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <!-- WebView相关 -->
+        <activity
+            android:name="com.yunzhanghu.redpacketui.ui.activity.RPWebViewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <!-- 零钱 -->
+        <activity
+            android:name="com.yunzhanghu.redpacketui.ui.activity.RPChangeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <!-- 绑定银行卡 -->
+        <activity
+            android:name="com.yunzhanghu.redpacketui.ui.activity.RPBankCardActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <!-- 群成员列表页 -->
+        <activity
+            android:name="com.yunzhanghu.redpacketui.ui.activity.RPGroupMemberActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <!-- 支付宝h5支付页面 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <!-- 转账页面 -->
+        <activity
+            android:name="com.yunzhanghu.redpacketui.ui.activity.RPTransferActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateVisible"/>
+        <!-- 转账详情页面 -->
+        <activity
+            android:name="com.yunzhanghu.redpacketui.ui.activity.RPTransferDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <!-- 红包相关Activity end -->
 
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

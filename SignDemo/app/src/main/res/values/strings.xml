@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">SignDemo</string>
+
+    <string name="transfer_msg_send">对方已收到转账</string>
+    <string name="transfer_msg_receive">已收到对方转账</string>
+    <string name="msg_transfer_to_you">[转账]向你转账%1$s元</string>
+    <string name="msg_transfer_from_you">[转账]转账%1$s元</string>
+    <string name="enter_single_red_packet">进入单聊红包页面</string>
+    <string name="enter_group_red_packet">进入群聊红包页面</string>
+    <string name="enter_transfer">进入转账页面</string>
+    <string name="enter_change">进入零钱页面</string>
+    <string name="enter_random_red_packet">进入小额随机红包页面</string>
+    <string name="swap_user">切换用户</string>
+
+    <string name="enter_group_p2p_red_packet">进入专属红包页面</string>
+    <string name="single">单人红包</string>
+    <string name="group">多人红包</string>
+    <string name="system">系统红包</string>
+    <string name="ad">广告红包</string>
+    <string name="change">零钱页面</string>
+    <string name="contact_us">联系我们</string>
+
+    <string name="msg_contact_us">客服热线 : 400-6565-739\n\n业务咨询 : BD@yunzhanghu.com\n\n客服QQ : 4006565739\n\n技术支持QQ群 : 366135448</string>
+    <string name="btn_str_confirm">确定</string>
 </resources>

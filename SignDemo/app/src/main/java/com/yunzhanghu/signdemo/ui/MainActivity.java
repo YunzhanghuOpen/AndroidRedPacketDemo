@@ -1,45 +1,80 @@
 package com.yunzhanghu.signdemo.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.TextView;
 
-import com.yunzhanghu.redpacketsdk.bean.RedPacketInfo;
-import com.yunzhanghu.redpacketsdk.bean.TokenData;
-import com.yunzhanghu.redpacketsdk.constant.RPConstant;
-import com.yunzhanghu.redpacketui.ui.activity.RPChangeActivity;
-import com.yunzhanghu.redpacketui.ui.activity.RPRedPacketActivity;
 import com.yunzhanghu.signdemo.R;
+import com.yunzhanghu.signdemo.utils.DemoUtil;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import static com.yunzhanghu.signdemo.DemoApplication.sCurrentNickname;
 
-    private static final String TAG = "MainActivity";
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
+
+    private TextView mTvCurrentUsername;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.btn_enter_red_packet).setOnClickListener(this);
-        findViewById(R.id.btn_enter_change).setOnClickListener(this);
+        findViewById(R.id.btn_single).setOnClickListener(this);
+        findViewById(R.id.btn_group).setOnClickListener(this);
+        findViewById(R.id.btn_system).setOnClickListener(this);
+        findViewById(R.id.btn_ad).setOnClickListener(this);
+        findViewById(R.id.btn_change).setOnClickListener(this);
+        findViewById(R.id.btn_contact_us).setOnClickListener(this);
+        mTvCurrentUsername = (TextView) findViewById(R.id.tv_current_user_nickname);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTvCurrentUsername.setText(String.format("当前用户昵称 ：%s", sCurrentNickname));
     }
 
     @Override
     public void onClick(View view) {
+        int fromFlag;
+        Intent intent = null;
         switch (view.getId()) {
-            case R.id.btn_enter_red_packet:
-                Intent intent = new Intent(this, RPRedPacketActivity.class);
-                intent.putExtra(RPConstant.EXTRA_RED_PACKET_INFO, new RedPacketInfo());
-                intent.putExtra(RPConstant.EXTRA_TOKEN_DATA, new TokenData());
-                startActivity(intent);
+            case R.id.btn_single:
+                fromFlag = 0;
+                intent = new Intent(this, DetailActivity.class);
+                intent.putExtra("from", fromFlag);
                 break;
-            case R.id.btn_enter_change:
-                Intent changeIntent = new Intent(this, RPChangeActivity.class);
-                changeIntent.putExtra(RPConstant.EXTRA_RED_PACKET_INFO, new RedPacketInfo());
-                changeIntent.putExtra(RPConstant.EXTRA_TOKEN_DATA, new TokenData());
-                startActivity(changeIntent);
+            case R.id.btn_group:
+                fromFlag = 1;
+                intent = new Intent(this, DetailActivity.class);
+                intent.putExtra("from", fromFlag);
+                break;
+            case R.id.btn_system:
+                break;
+            case R.id.btn_ad:
+                break;
+            case R.id.btn_change:
+                DemoUtil.startChangeActivity(this);
+                break;
+            case R.id.btn_contact_us:
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.contact_us)
+                        .setMessage(getString(R.string.msg_contact_us))
+                        .setPositiveButton(R.string.btn_str_confirm, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).show();
                 break;
         }
-
+        if (intent != null) {
+            startActivity(intent);
+        }
     }
+
+
 }

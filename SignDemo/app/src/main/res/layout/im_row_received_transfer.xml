@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:paddingTop="13dp"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/iv_transfer_receive_avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/rp_avatar"
+            />
+
+        <TextView
+            android:id="@+id/tv_transfer_receive_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@id/iv_transfer_receive_avatar"
+            android:textSize="15sp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/bubble"
+            android:layout_width="210dp"
+            android:layout_height="90dp"
+            android:layout_below="@+id/tv_transfer_receive_name"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/iv_transfer_receive_avatar"
+            android:background="@drawable/im_transfer_chatfrom_bg"
+            >
+
+            <ImageView
+                android:id="@+id/iv_money_icon"
+                style="@style/RedPacketIconStyle"
+                android:src="@drawable/im_transfer_icon"
+                />
+
+            <TextView
+                android:id="@+id/tv_money_greeting"
+                style="@style/RedPacketGreetingStyle"
+                android:text="@string/transfer_msg_receive"
+                />
+
+            <TextView
+                android:id="@+id/tv_transfer_receive"
+                style="@style/RedPacketCheckStyle"
+                android:layout_below="@id/tv_money_greeting"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                >
+
+                <TextView
+                    android:id="@+id/tv_transfer_sponsor_name"
+                    style="@style/RedPacketSponsorStyle"
+                    android:text="转账"
+                    />
+
+                <ImageView
+                    style="@style/RedPacketSponsorIconStyle"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>
