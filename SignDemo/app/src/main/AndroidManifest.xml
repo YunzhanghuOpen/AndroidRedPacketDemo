@@ -78,5 +78,5 @@
         <!-- 红包相关Activity end -->
 
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
