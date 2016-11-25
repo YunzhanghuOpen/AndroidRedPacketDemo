@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="str_switch_to_normal_packet">切换至普通红包</string>
+    <string name="rp_str_switch_amount">切换金额</string>
+</resources>
