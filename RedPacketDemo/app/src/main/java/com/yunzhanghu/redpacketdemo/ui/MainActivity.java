@@ -1,17 +1,19 @@
-package com.yunzhanghu.signdemo.ui;
+package com.yunzhanghu.redpacketdemo.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yunzhanghu.signdemo.R;
-import com.yunzhanghu.signdemo.utils.DemoUtil;
+import com.yunzhanghu.redpacketdemo.R;
+import com.yunzhanghu.redpacketdemo.utils.DemoUtil;
+import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
 
-import static com.yunzhanghu.signdemo.DemoApplication.sCurrentNickname;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentNickname;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
@@ -21,6 +23,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (TextUtils.isEmpty(PreferenceUtil.getInstance().getSenderName()) || TextUtils.isEmpty(PreferenceUtil.getInstance().getReceiverName())) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        } else {
+            DemoUtil.initUserInfo();
+        }
         setContentView(R.layout.activity_main);
         findViewById(R.id.btn_single).setOnClickListener(this);
         findViewById(R.id.btn_group).setOnClickListener(this);
@@ -28,6 +36,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         findViewById(R.id.btn_ad).setOnClickListener(this);
         findViewById(R.id.btn_change).setOnClickListener(this);
         findViewById(R.id.btn_contact_us).setOnClickListener(this);
+        findViewById(R.id.btn_clear_user_cache).setOnClickListener(this);
         mTvCurrentUsername = (TextView) findViewById(R.id.tv_current_user_nickname);
     }
 
@@ -88,10 +97,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             }
                         }).show();
                 break;
+            case R.id.btn_clear_user_cache:
+                clearCache();
+                break;
         }
         if (intent != null) {
             startActivity(intent);
         }
+    }
+
+    private void clearCache() {
+        PreferenceUtil.getInstance().setSenderName(null);
+        PreferenceUtil.getInstance().setReceiverName(null);
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
 

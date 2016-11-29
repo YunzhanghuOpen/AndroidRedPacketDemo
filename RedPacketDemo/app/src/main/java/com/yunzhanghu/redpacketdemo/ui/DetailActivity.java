@@ -1,4 +1,4 @@
-package com.yunzhanghu.signdemo.ui;
+package com.yunzhanghu.redpacketdemo.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,21 +10,21 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 import com.yunzhanghu.redpacketui.utils.RPRedPacketUtil;
-import com.yunzhanghu.signdemo.R;
+import com.yunzhanghu.redpacketdemo.R;
 
-import static com.yunzhanghu.signdemo.DemoApplication.sCurrentAvatarUrl;
-import static com.yunzhanghu.signdemo.DemoApplication.sCurrentNickname;
-import static com.yunzhanghu.signdemo.DemoApplication.sCurrentUserId;
-import static com.yunzhanghu.signdemo.DemoApplication.sToAvatarUrl;
-import static com.yunzhanghu.signdemo.DemoApplication.sToNickname;
-import static com.yunzhanghu.signdemo.DemoApplication.sToUserId;
-import static com.yunzhanghu.signdemo.utils.DemoUtil.getRedPacketType;
-import static com.yunzhanghu.signdemo.utils.DemoUtil.openRedPacket;
-import static com.yunzhanghu.signdemo.utils.DemoUtil.openTransferPacket;
-import static com.yunzhanghu.signdemo.utils.DemoUtil.startChangeActivity;
-import static com.yunzhanghu.signdemo.utils.DemoUtil.startRandomPacket;
-import static com.yunzhanghu.signdemo.utils.DemoUtil.startRedPacketForResult;
-import static com.yunzhanghu.signdemo.utils.DemoUtil.startTransferActivityForResult;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentAvatarUrl;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentNickname;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentUserId;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sToAvatarUrl;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sToNickname;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sToUserId;
+import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.getRedPacketType;
+import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.openRedPacket;
+import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.openTransferPacket;
+import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.startChangeActivity;
+import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.startRandomPacket;
+import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.startRedPacketForResult;
+import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.startTransferActivityForResult;
 
 public class DetailActivity extends FragmentActivity implements View.OnClickListener {
 

@@ -48,7 +48,6 @@
         android:layout_marginTop="@dimen/size9px"
         android:layout_below="@id/tv_red_money"
         android:gravity="center"
-        android:text="￥200"
         android:textColor="@color/rp_text_black"
         android:textSize="@dimen/font90px" />
 

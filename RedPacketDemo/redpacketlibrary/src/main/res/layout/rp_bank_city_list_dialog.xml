@@ -27,7 +27,7 @@
         android:paddingBottom="@dimen/size24px"
         android:paddingLeft="@dimen/size15px"
         android:paddingTop="@dimen/size24px"
-        android:singleLine="true"
+        android:maxLines="1"
         android:textColor="@color/rp_text_black"
         android:textColorHint="@color/rp_text_light_grey"
         android:textSize="@dimen/font42px"

@@ -1,1 +1,1 @@
-include ':app', ':redpacketlibrary'
+include ':app', ':redpacketlibrary', ':RedPacket3.3.0-release'

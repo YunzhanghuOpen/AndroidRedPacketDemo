@@ -1,4 +1,4 @@
-package com.yunzhanghu.signdemo.model;
+package com.yunzhanghu.redpacketdemo.model;
 
 /**
  * Created by Max on 2016/11/14.

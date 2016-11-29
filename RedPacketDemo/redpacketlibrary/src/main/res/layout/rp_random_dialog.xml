@@ -33,7 +33,7 @@
             android:layout_weight="1"
             android:gravity="right"
             android:padding="@dimen/size24px"
-            android:text="@string/str_switch_to_normal_packet"
+            android:text="@string/rp_str_switch_to_normal_packet"
             android:textColor="@color/rp_switch_packet_red"
             android:textSize="@dimen/font51px"/>
     </LinearLayout>
@@ -66,7 +66,6 @@
         android:gravity="center"
         android:maxEms="10"
         android:maxLines="1"
-        android:text=""
         android:textColor="@color/rp_money_white"
         android:textSize="@dimen/font42px"/>
 
@@ -80,7 +79,6 @@
         android:layout_marginTop="@dimen/size60px"
         android:gravity="center"
         android:maxLength="22"
-        android:text=""
         android:textColor="@color/rp_title_color"
         android:textSize="@dimen/font69px"/>
 
@@ -92,7 +90,6 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/size15px"
         android:gravity="center"
-        android:text=""
         android:textColor="@color/rp_title_color"
         android:textSize="@dimen/font108px"/>
 

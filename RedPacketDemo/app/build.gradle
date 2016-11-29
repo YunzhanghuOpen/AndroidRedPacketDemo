@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.yunzhanghu.signdemo"
         minSdkVersion 15
@@ -29,7 +29,11 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':redpacketlibrary')
+    if (dependenciesArr.toBoolean()) {
+        compile project(':RedPacket3.3.0-release')
+    } else {
+        compile project(':redpacketlibrary')
+    }
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-jackson:2.1.0'

@@ -40,6 +40,7 @@
                 android:layout_marginLeft="@dimen/size45px"
                 android:layout_marginRight="@dimen/size45px"
                 android:layout_marginTop="@dimen/size63px"
+                android:baselineAligned="false"
                 android:orientation="horizontal"
                 >
 
@@ -109,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="身份证正面"
+                    android:text="@string/rp_str_card_front"
                     android:textColor="@color/rp_money_white"
                     android:textSize="@dimen/font48px"
                     />
@@ -119,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="身份证反面"
+                    android:text="@string/rp_str_card_back"
                     android:textColor="@color/rp_money_white"
                     android:textSize="@dimen/font48px"
                     />
@@ -179,6 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size45px"
                 android:layout_marginTop="@dimen/size39px"
+                android:baselineAligned="false"
                 android:orientation="horizontal"
                 >
 
@@ -194,7 +196,6 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:background="@drawable/rp_picture_right"
                         />
 
@@ -220,7 +221,6 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:background="@drawable/rp_picture_frame_lack"
                         />
 
@@ -246,7 +246,6 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:background="@drawable/rp_picture_vague"
                         />
 
@@ -272,7 +271,6 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:background="@drawable/rp_picture_flash_strong"
                         />
 

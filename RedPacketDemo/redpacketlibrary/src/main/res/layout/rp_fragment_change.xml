@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size15px"
                     android:gravity="center"
-                    android:text="￥-.--"
+                    android:text="@string/rp_str_change_balance"
                     android:textColor="@color/rp_money_white"
                     android:textSize="@dimen/font129px"/>
 

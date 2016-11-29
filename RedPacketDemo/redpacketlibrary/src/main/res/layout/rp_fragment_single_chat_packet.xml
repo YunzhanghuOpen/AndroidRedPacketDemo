@@ -82,7 +82,6 @@
         android:layout_below="@id/greeting_layout"
         android:layout_marginTop="@dimen/size72px"
         android:gravity="center"
-        android:text="￥0.00"
         android:textColor="@color/rp_text_black"
         android:textSize="@dimen/font108px" />
 

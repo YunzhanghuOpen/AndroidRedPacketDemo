@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SignDemo</string>
+    <string name="app_name">RedPacketDemo</string>
 
     <string name="transfer_msg_send">对方已收到转账</string>
     <string name="transfer_msg_receive">已收到对方转账</string>
@@ -19,7 +19,18 @@
     <string name="ad">广告红包</string>
     <string name="change">零钱页面</string>
     <string name="contact_us">联系我们</string>
+    <string name="clear_cache">清除用户</string>
 
     <string name="msg_contact_us">客服热线 : 400-6565-739\n\n业务咨询 : BD@yunzhanghu.com\n\n客服QQ : 4006565739\n\n技术支持QQ群 : 366135448</string>
     <string name="btn_str_confirm">确定</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_sender">请输入发送者昵称</string>
+    <string name="prompt_receiver">请输入接收者昵称</string>
+    <string name="action_sign_in">进入demo</string>
+    <string name="error_invalid_sender_name">发送者昵称输入错误</string>
+    <string name="error_invalid_receiver_name">接收者昵称输入错误</string>
+    <string name="error_invalid_mobile_no">您输入的手机号不合法</string>
+    <string name="demo_tips">为防止和其他Demo使用者用户名重复，请输入真实有效的手机号。</string>
 </resources>

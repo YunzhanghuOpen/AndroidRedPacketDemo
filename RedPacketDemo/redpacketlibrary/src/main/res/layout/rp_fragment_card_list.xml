@@ -50,7 +50,7 @@
             android:layout_marginRight="@dimen/size45px"
             android:layout_marginTop="@dimen/size141px"
             android:background="@drawable/rp_btn_white_selector"
-            android:text="添加一张银行卡"
+            android:text="@string/rp_str_add_card"
             android:textColor="@color/rp_text_black"
             />
     </LinearLayout>

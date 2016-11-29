@@ -48,9 +48,8 @@
             android:id="@+id/tv_transfer_detail_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="+"
+            android:text="@string/transfer_add"
             android:textColor="@color/rp_text_black"
             android:textSize="@dimen/font90px" />
 
@@ -58,9 +57,7 @@
             android:id="@+id/tv_transfer_detail_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="100.00"
             android:textColor="@color/rp_text_black"
             android:textSize="@dimen/font90px" />
 
@@ -79,7 +76,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/transfer_change"
             android:textColor="@color/rp_text_light_grey" />
@@ -88,7 +84,6 @@
             android:id="@+id/tv_transfer_detail_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/size15px"
             android:gravity="center"
             android:text="@string/transfer_see_change"
@@ -119,7 +114,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/size15px"
             android:gravity="center"
-            android:text=""
             android:textColor="@color/rp_text_light_grey" />
 
     </LinearLayout>

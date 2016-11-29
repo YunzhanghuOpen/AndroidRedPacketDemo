@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <!--红包相关-->
     <string name="money_amount">金额</string>
@@ -239,6 +239,7 @@
     <string name="transfer_change">已存入零钱，</string>
     <string name="transfer_see_change">查看零钱</string>
     <string name="transfer_time">转账时间：</string>
+    <string name="transfer_add">&#043;</string>
     <string name="safe_hint_title">安全提示</string>
     <!--广告红包-->
     <string name="money_sponsor_username_format">%1$s的红包</string>
@@ -254,4 +255,16 @@
     <string name="random_status_taken_receive">成功领取，已存入零钱</string>
     <string name="random_to_username">给&#160;%1$s&#160;的红包</string>
     <string name="random_from_username">%1$s给您发送的红包</string>
+
+    <string name="rp_str_pay_failure">支付失败</string>
+    <string name="rp_str_user_cancel">用户取消</string>
+    <string name="rp_str_switch_to_normal_packet">切换至普通红包</string>
+    <string name="rp_str_switch_amount">切换金额</string>
+    <string name="rp_str_change_balance">￥-.--</string>
+    <string name="rp_str_add_card">添加一张银行卡</string>
+    <string name="rp_str_rmb_symbol">￥</string>
+    <string name="rp_str_card_front">身份证正面</string>
+    <string name="rp_str_card_back">身份证反面</string>
+    <string name="rp_str_remove_card">移除银行卡</string>
+    <string name="rp_str_amount_zero">￥0.00</string>
 </resources>

@@ -1,17 +1,16 @@
-package com.yunzhanghu.signdemo;
+package com.yunzhanghu.redpacketdemo;
 
 import android.app.Application;
 import android.util.Log;
 
+import com.yunzhanghu.redpacketdemo.api.SignService;
+import com.yunzhanghu.redpacketdemo.model.SignModel;
+import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
 import com.yunzhanghu.redpacketsdk.RPRefreshSignListener;
 import com.yunzhanghu.redpacketsdk.RPValueCallback;
 import com.yunzhanghu.redpacketsdk.RedPacket;
 import com.yunzhanghu.redpacketsdk.bean.TokenData;
 import com.yunzhanghu.redpacketsdk.constant.RPConstant;
-import com.yunzhanghu.signdemo.api.SignService;
-import com.yunzhanghu.signdemo.model.SignModel;
-
-import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,23 +54,11 @@ public class DemoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initUser();
+        //初始化SharePreference,Demo中用于存储用户名
+        PreferenceUtil.init(this);
         initRedPacket();
     }
 
-    /**
-     * 一般是在用户登录后获取用户信息，这里主要为了演示使用
-     */
-    private void initUser() {
-        sCurrentNickname = "Max";
-        //使用昵称做为种子生成随机的用户id，实际开发中需传入APP生成的用户id
-        sCurrentUserId = UUID.nameUUIDFromBytes(sCurrentNickname.getBytes()).toString();
-        sCurrentAvatarUrl = "http://i.imgur.com/DvpvklR.png";
-
-        sToNickname = "Max001";
-        sToUserId = UUID.nameUUIDFromBytes(sToNickname.getBytes()).toString();
-        sToAvatarUrl = "http://i.imgur.com/Nptlyr9.jpg";
-    }
 
     private void initRedPacket() {
         //初始化红包SDK

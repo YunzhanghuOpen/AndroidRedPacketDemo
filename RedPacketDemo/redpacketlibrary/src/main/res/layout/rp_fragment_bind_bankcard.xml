@@ -24,7 +24,7 @@
             android:layout_alignRight="@+id/tv_bankcard_number"
             android:layout_centerInParent="false"
             android:gravity="center_vertical"
-            android:text="持卡人"
+            android:text="@string/card_holder"
             android:visibility="gone"/>
 
         <EditText

@@ -148,7 +148,6 @@
         android:layout_marginRight="@dimen/size81px"
         android:gravity="center"
         android:maxLines="1"
-        android:text="￥8.00"
         android:textColor="@color/rp_title_color"
         android:textSize="@dimen/font129px"
         android:visibility="gone"

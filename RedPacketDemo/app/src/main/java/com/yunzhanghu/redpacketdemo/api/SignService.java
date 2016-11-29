@@ -1,6 +1,6 @@
-package com.yunzhanghu.signdemo.api;
+package com.yunzhanghu.redpacketdemo.api;
 
-import com.yunzhanghu.signdemo.model.SignModel;
+import com.yunzhanghu.redpacketdemo.model.SignModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

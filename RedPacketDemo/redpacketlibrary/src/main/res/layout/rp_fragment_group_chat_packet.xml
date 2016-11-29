@@ -37,6 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_toLeftOf="@id/iv_arrow"
+                android:layout_toRightOf="@id/tv_receive"
                 android:ellipsize="end"
                 android:gravity="center|right"
                 android:maxEms="11"
@@ -178,10 +179,8 @@
             android:id="@+id/tv_money"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greeting_layout"
             android:layout_marginTop="@dimen/size72px"
             android:gravity="center"
-            android:text="￥0.00"
             android:textColor="@color/rp_text_black"
             android:textSize="@dimen/font108px" />
 

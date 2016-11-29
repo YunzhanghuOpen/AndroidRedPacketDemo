@@ -31,7 +31,7 @@
             android:layout_marginLeft="@dimen/size45px"
             android:layout_toRightOf="@id/tv_add_bankcard_number"
             android:gravity="center_vertical"
-            android:text="1234455"
+            android:text=""
             android:textColor="@color/rp_text_light_grey"
             android:textSize="@dimen/font45px"
             />
@@ -43,7 +43,7 @@
         android:id="@+id/tv_add_bankcard_name"
         style="@style/BindBankCardTextViewStyle"
         android:layout_below="@id/layout_withdraw_card_no"
-        android:text="中国工商银行"
+        android:text=""
         android:textColor="@color/rp_text_light_grey"
         android:textSize="@dimen/font36px"
         />

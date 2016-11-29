@@ -1,4 +1,4 @@
-package com.yunzhanghu.signdemo.utils;
+package com.yunzhanghu.redpacketdemo.utils;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -21,13 +21,14 @@ import com.yunzhanghu.redpacketui.utils.RPRedPacketUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import static com.yunzhanghu.signdemo.DemoApplication.sCurrentAvatarUrl;
-import static com.yunzhanghu.signdemo.DemoApplication.sCurrentNickname;
-import static com.yunzhanghu.signdemo.DemoApplication.sCurrentUserId;
-import static com.yunzhanghu.signdemo.DemoApplication.sToAvatarUrl;
-import static com.yunzhanghu.signdemo.DemoApplication.sToNickname;
-import static com.yunzhanghu.signdemo.DemoApplication.sToUserId;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentAvatarUrl;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentNickname;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentUserId;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sToAvatarUrl;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sToNickname;
+import static com.yunzhanghu.redpacketdemo.DemoApplication.sToUserId;
 
 /**
  * Created by Max on 2016/11/22.
@@ -50,7 +51,12 @@ public class DemoUtil {
         activity.startActivityForResult(intent, requestCode);
     }
 
-
+    /**
+     * 进入小额随机红包页面
+     *
+     * @param activity FragmentActivity
+     * @param callBack RPRandomCallback
+     */
     public static void startRandomPacket(FragmentActivity activity, RPRedPacketUtil.RPRandomCallback callBack) {
         //当前用户昵称和头像rul
         RedPacketInfo redPacketInfo = new RedPacketInfo();
@@ -284,5 +290,17 @@ public class DemoUtil {
             typeStr = "专属红包";
         }
         return typeStr;
+    }
+
+
+    public static void initUserInfo() {
+        //缓存用户信息到本地
+        sCurrentNickname = PreferenceUtil.getInstance().getSenderName();
+        sToNickname = PreferenceUtil.getInstance().getReceiverName();
+        //使用昵称做为种子生成的用户id，实际开发中需传入APP生成的用户id
+        sCurrentUserId = UUID.nameUUIDFromBytes(sCurrentNickname.getBytes()).toString();
+        sCurrentAvatarUrl = "http://i.imgur.com/DvpvklR.png";
+        sToUserId = UUID.nameUUIDFromBytes(sToNickname.getBytes()).toString();
+        sToAvatarUrl = "http://i.imgur.com/Nptlyr9.jpg";
     }
 }

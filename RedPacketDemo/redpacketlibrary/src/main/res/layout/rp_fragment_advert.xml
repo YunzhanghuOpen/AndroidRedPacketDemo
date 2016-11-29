@@ -8,8 +8,7 @@
         android:id="@+id/iv_advert_bg"
         android:layout_width="match_parent"
         android:layout_height="279dp"
-        android:scaleType="fitXY"
-        />
+        android:scaleType="fitXY" />
 
     <RelativeLayout
         android:id="@+id/layout_ad_bottom"
@@ -52,7 +51,7 @@
                 android:layout_marginTop="@dimen/size141px"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textColor="@color/rp_text_black"
                 android:textSize="@dimen/font45px" />
 
@@ -66,7 +65,7 @@
                 android:layout_marginTop="@dimen/size30px"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textColor="@color/rp_text_black"
                 android:textSize="@dimen/font36px"
                 android:visibility="gone" />
@@ -99,8 +98,7 @@
             android:id="@+id/iv_advert_icon"
             android:layout_width="@dimen/size210px"
             android:layout_height="@dimen/size210px"
-            android:layout_centerHorizontal="true"
-           />
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
     <LinearLayout
