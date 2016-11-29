@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.yunzhanghu.redpacketdemo.R;
-import com.yunzhanghu.redpacketdemo.utils.DemoUtil;
 import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
+import com.yunzhanghu.redpacketdemo.utils.RedPacketUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +48,7 @@ public class LoginActivity extends FragmentActivity {
         //缓存输入的用户信息
         PreferenceUtil.getInstance().setSenderName(senderName);
         PreferenceUtil.getInstance().setReceiverName(receiverName);
-        DemoUtil.initUserInfo();
+        RedPacketUtil.initUserInfo();
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

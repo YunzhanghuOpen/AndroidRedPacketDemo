@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PreferenceUtil {
-    /**
-     * 保存Preference的name
-     */
+
     public static final String PREFERENCE_NAME = "user_info";
 
     private static SharedPreferences mSharedPreferences;

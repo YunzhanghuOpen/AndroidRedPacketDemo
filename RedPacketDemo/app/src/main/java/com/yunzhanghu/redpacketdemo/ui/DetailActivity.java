@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.yunzhanghu.redpacketdemo.R;
 import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 import com.yunzhanghu.redpacketui.utils.RPRedPacketUtil;
-import com.yunzhanghu.redpacketdemo.R;
 
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentAvatarUrl;
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentNickname;
@@ -18,13 +18,13 @@ import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentUserId;
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sToAvatarUrl;
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sToNickname;
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sToUserId;
-import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.getRedPacketType;
-import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.openRedPacket;
-import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.openTransferPacket;
-import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.startChangeActivity;
-import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.startRandomPacket;
-import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.startRedPacketForResult;
-import static com.yunzhanghu.redpacketdemo.utils.DemoUtil.startTransferActivityForResult;
+import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.getRedPacketType;
+import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.openRedPacket;
+import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.openTransferPacket;
+import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.startChangeActivity;
+import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.startRandomPacket;
+import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.startRedPacketForResult;
+import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.startTransferActivityForResult;
 
 public class DetailActivity extends FragmentActivity implements View.OnClickListener {
 
@@ -94,6 +94,8 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
 
     private TextView mTvRedPacketType;
 
+    private boolean mIsRandomPacket;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,9 +157,12 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
                 startRedPacketForResult(this, mChatType, false, RED_PACKET_REQUEST_CODE);
                 break;
             case R.id.btn_enter_random_packet:
+                mIsRandomPacket = true;
+                mChatType = RPConstant.CHATTYPE_SINGLE;
                 startRandomPacket(this, new RPRedPacketUtil.RPRandomCallback() {
                     @Override
                     public void onSendPacketSuccess(Intent intent) {
+                        clearMessageBubble();
                         mRedPacketId = intent.getStringExtra(RPConstant.EXTRA_RED_PACKET_ID);
                         mRedPacketType = intent.getStringExtra(RPConstant.EXTRA_RED_PACKET_TYPE);
                         String greetings = intent.getStringExtra(RPConstant.EXTRA_RED_PACKET_GREETING);
@@ -168,6 +173,7 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
 
                     @Override
                     public void switchToNormalPacket() {
+                        mChatType = RPConstant.CHATTYPE_SINGLE;
                         startRedPacketForResult(DetailActivity.this, RPConstant.CHATTYPE_SINGLE, true, RED_PACKET_REQUEST_CODE);
                     }
                 });
@@ -191,11 +197,14 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
                 break;
             case R.id.layout_red_packet_send:
             case R.id.layout_red_packet_receive:
-                openRedPacket(this, mChatType, mRedPacketId, mRedPacketType, mReceiverId, mCurrentDirect);
+                openRedPacket(this, mChatType, mRedPacketId, mRedPacketType, mReceiverId, mCurrentDirect, mIsRandomPacket);
                 break;
             case R.id.layout_transfer_send:
             case R.id.layout_transfer_receive:
                 openTransferPacket(this, mCurrentDirect, mTransferAmount, mTransferTime);
+                break;
+            default:
+                mIsRandomPacket = false;
                 break;
         }
     }

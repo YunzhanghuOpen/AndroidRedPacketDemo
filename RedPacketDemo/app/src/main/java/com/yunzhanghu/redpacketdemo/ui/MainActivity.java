@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yunzhanghu.redpacketdemo.R;
-import com.yunzhanghu.redpacketdemo.utils.DemoUtil;
+import com.yunzhanghu.redpacketdemo.utils.RedPacketUtil;
 import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
 
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentNickname;
@@ -27,7 +27,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         } else {
-            DemoUtil.initUserInfo();
+            RedPacketUtil.initUserInfo();
         }
         setContentView(R.layout.activity_main);
         findViewById(R.id.btn_single).setOnClickListener(this);
@@ -84,7 +84,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         }).show();
                 break;
             case R.id.btn_change:
-                DemoUtil.startChangeActivity(this);
+                RedPacketUtil.startChangeActivity(this);
                 break;
             case R.id.btn_contact_us:
                 new AlertDialog.Builder(this)
