@@ -22,6 +22,8 @@
     <string name="clear_cache">清除用户</string>
 
     <string name="msg_contact_us">客服热线 : 400-6565-739\n\n业务咨询 : BD@yunzhanghu.com\n\n客服QQ : 4006565739\n\n技术支持QQ群 : 366135448</string>
+    <string name="msg_system_red_packet">以系统管理员的身份给用户发拼手气群红包，特别适合开发者们做运营活动使用。详情请咨询客服。</string>
+    <string name="msg_ad_red_packet">使用云账户的商户端进行广告计划和品牌主红包素材配置，计划开始执行时，给符合条件的用户发放一个品牌红包，增加品牌曝光量。详情请咨询客服。</string>
     <string name="btn_str_confirm">确定</string>
 
     <!-- Strings related to login -->

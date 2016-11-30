@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yunzhanghu.redpacketdemo.R;
-import com.yunzhanghu.redpacketdemo.utils.RedPacketUtil;
 import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
+import com.yunzhanghu.redpacketdemo.utils.RedPacketUtil;
 
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentNickname;
 
@@ -63,8 +63,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.btn_system:
                 new AlertDialog.Builder(this)
-                        .setTitle(R.string.contact_us)
-                        .setMessage(getString(R.string.msg_contact_us))
+                        .setTitle(R.string.system)
+                        .setMessage(getString(R.string.msg_system_red_packet))
                         .setPositiveButton(R.string.btn_str_confirm, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -74,8 +74,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.btn_ad:
                 new AlertDialog.Builder(this)
-                        .setTitle(R.string.contact_us)
-                        .setMessage(getString(R.string.msg_contact_us))
+                        .setTitle(R.string.ad)
+                        .setMessage(getString(R.string.msg_ad_red_packet))
                         .setPositiveButton(R.string.btn_str_confirm, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
