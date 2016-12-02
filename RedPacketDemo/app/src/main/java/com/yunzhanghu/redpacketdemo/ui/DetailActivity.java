@@ -132,7 +132,7 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
         mIvTransferSendAvatar = (ImageView) findViewById(R.id.iv_transfer_send_avatar);
         mIvTransferReceiveAvatar = (ImageView) findViewById(R.id.iv_transfer_receive_avatar);
         mTvRedPacketType = (TextView) findViewById(R.id.tv_red_packet_type);
-        mTvCurrentUserNickname.setText(String.format("当前用户昵称： %s", sCurrentNickname));
+        mTvCurrentUserNickname.setText(String.format(getString(R.string.str_current_nickname), sCurrentNickname));
     }
 
     private void switchButtonLayout() {
@@ -253,7 +253,7 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
             mTvSendRedPacketType.setVisibility(View.GONE);
         }
         mSendPacketLayout.setVisibility(View.VISIBLE);
-        mTvRedPacketType.setText(String.format("红包类型 ： %s", getRedPacketType(mRedPacketType)));
+        mTvRedPacketType.setText(String.format(getString(R.string.str_red_packet_type), getRedPacketType(mRedPacketType)));
     }
 
     /**
@@ -281,7 +281,7 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
         String tempAvatarUrl = sCurrentAvatarUrl;
         sCurrentAvatarUrl = sToAvatarUrl;
         sToAvatarUrl = tempAvatarUrl;
-        mTvCurrentUserNickname.setText(String.format("当前用户昵称： %s", sCurrentNickname));
+        mTvCurrentUserNickname.setText(String.format(getString(R.string.str_current_nickname), sCurrentNickname));
         mTvPacketReceiveName.setText(tempNickname);
         mTvTransferReceiveName.setText(tempNickname);
         Glide.with(this).load(tempAvatarUrl).into(mIvPacketReceiveAvatar);

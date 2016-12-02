@@ -34,4 +34,6 @@
     <string name="error_invalid_receiver_name">接收者昵称输入错误</string>
     <string name="error_invalid_mobile_no">您输入的手机号不合法</string>
     <string name="demo_tips">为防止和其他Demo使用者用户名重复，请输入真实有效的手机号。</string>
+    <string name="str_red_packet_type">红包类型 ： %s</string>
+    <string name="str_current_nickname">当前用户昵称： %s</string>
 </resources>
