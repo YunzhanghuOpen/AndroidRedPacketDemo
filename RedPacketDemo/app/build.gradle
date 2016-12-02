@@ -30,7 +30,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     if (dependOnARR.toBoolean()) {
-        compile project(':RedPacket3.3.0-release')
+        compile project(':RedPacket3.3.1-release')
     } else {
         compile project(':redpacketlibrary')
     }

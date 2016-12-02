@@ -246,8 +246,9 @@
     <string name="btn_immediately_received">点击领取</string>
     <string name="ad_receive_change">收到的零钱可用于发红包或提现</string>
     <string name="ad_receive">已领取</string>
-    <string name="ad_check_land_page">去看看%1$s</string>
-    <string name="ad_packet_out">来晚了，红包已过期</string>
+    <string name="ad_check_land_page">去看看</string>
+    <string name="ad_packet_out">已过期</string>
+    <string name="ad_packet_share">分享得红包</string>
     <!--小额随机红包-->
     <string name="random_status_out">红包已过期</string>
     <string name="random_status_no_taken">等待对方领取</string>
