@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.yunzhanghu.redpacketdemo.R;
 import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
@@ -63,6 +64,10 @@ public class LoginActivity extends FragmentActivity {
         if (TextUtils.isEmpty(receiverName)) {
             mReceiverView.requestFocus();
             mReceiverView.setError(getString(R.string.error_invalid_receiver_name));
+            return true;
+        }
+        if (receiverName.equals(senderName)) {
+            Toast.makeText(this, R.string.str_same_mobile_tip, Toast.LENGTH_SHORT).show();
             return true;
         }
         if (!isMobileNO(senderName)) {
