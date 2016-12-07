@@ -1,84 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3E9E8"
+    android:orientation="vertical"
     >
 
-    <TextView
-        android:id="@+id/tv_current_user_nickname"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="16sp"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_current_user_nickname"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="60dp"
-        android:gravity="center"
+        android:background="#D24F44"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_single"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="@string/single"/>
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/str_current_user"
+            android:textColor="#FFFFFFFF"
+            android:textSize="21sp"/>
 
-        <Button
-            android:id="@+id/btn_group"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="@string/group"/>
+        <ImageView
+            android:id="@+id/iv_current_user_avatar"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/default_avatar"/>
 
-        <Button
-            android:id="@+id/btn_system"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="@string/system"/>
 
-        <Button
-            android:id="@+id/btn_ad"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_current_user_nickname"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="@string/ad"/>
-
-        <Button
-            android:id="@+id/btn_change"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="@string/change"/>
-
-        <Button
-            android:id="@+id/btn_contact_us"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="@string/contact_us"/>
-
-        <Button
-            android:id="@+id/btn_clear_user_cache"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="@string/clear_cache"/>
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textColor="#FFFFFFFF"
+            android:textSize="27sp"/>
     </LinearLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:scrollbars="vertical"/>
 
-</RelativeLayout>
+
+    <TextView
+        android:id="@+id/btn_clear_user_cache"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="118dp"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="@string/clear_cache"
+        android:textColor="#44459A"
+        android:textSize="21sp"/>
+
+
+</LinearLayout>

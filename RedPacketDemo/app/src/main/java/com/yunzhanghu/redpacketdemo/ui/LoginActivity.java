@@ -8,8 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yunzhanghu.redpacketdemo.R;
@@ -30,7 +30,7 @@ public class LoginActivity extends FragmentActivity {
         setContentView(R.layout.activity_login);
         mSenderView = (EditText) findViewById(R.id.sender);
         mReceiverView = (EditText) findViewById(R.id.receiver);
-        Button signInButton = (Button) findViewById(R.id.sign_in_button);
+        TextView signInButton = (TextView) findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

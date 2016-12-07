@@ -1,62 +1,68 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_margin="15dp"
+              android:layout_marginLeft="39dp"
+              android:layout_marginRight="39dp"
               android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/accumulus_logo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text="欢迎使用云账户红包Demo"
+        android:textColor="#d24f44"
+        android:textSize="21sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="5dp"
         android:text="@string/demo_tips"
-        android:textColor="@color/colorAccent"
-        android:textSize="15sp"/>
+        android:textColor="#999999"
+        android:textSize="16sp"/>
 
 
-    <android.support.design.widget.TextInputLayout
+    <EditText
+        android:id="@+id/sender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        >
+        android:layout_marginTop="40dp"
+        android:hint="@string/prompt_sender"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:maxLines="1"
+        />
 
-        <EditText
-            android:id="@+id/sender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/prompt_sender"
-            android:inputType="phone"
-            android:maxLength="11"
-            android:maxLines="1"
-            />
 
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
+    <EditText
+        android:id="@+id/receiver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        >
+        android:layout_marginTop="20dp"
+        android:hint="@string/prompt_receiver"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:maxLines="1"
+        />
 
-        <EditText
-            android:id="@+id/receiver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/prompt_receiver"
-            android:inputType="phone"
-            android:maxLength="11"
-            android:maxLines="1"
-            />
 
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
+    <TextView
         android:id="@+id/sign_in_button"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="13dp"
+        android:drawableRight="@drawable/arrow_right"
+        android:gravity="center"
         android:text="@string/action_sign_in"
-        android:textStyle="bold"/>
+        android:textColor="#44459A"
+        android:textSize="21sp"/>
 
 </LinearLayout>
