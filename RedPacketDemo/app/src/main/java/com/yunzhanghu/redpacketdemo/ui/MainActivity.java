@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -17,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.yunzhanghu.redpacketdemo.R;
 import com.yunzhanghu.redpacketdemo.adapter.RecyclerAdapter;
 import com.yunzhanghu.redpacketdemo.utils.CircleTransform;
+import com.yunzhanghu.redpacketdemo.utils.GridItemDecoration;
 import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
 import com.yunzhanghu.redpacketdemo.utils.RecyclerItemClickListener;
 import com.yunzhanghu.redpacketdemo.utils.RedPacketUtil;
@@ -47,8 +47,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new GridItemDecoration(this));
         recyclerView.setAdapter(new RecyclerAdapter());
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, this));
     }
