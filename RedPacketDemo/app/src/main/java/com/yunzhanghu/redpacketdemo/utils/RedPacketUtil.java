@@ -319,6 +319,6 @@ public class RedPacketUtil {
         sCurrentUserId = UUID.nameUUIDFromBytes(sCurrentNickname.getBytes()).toString();
         sCurrentAvatarUrl = "http://i.imgur.com/DvpvklR.png";
         sToUserId = UUID.nameUUIDFromBytes(sToNickname.getBytes()).toString();
-        sToAvatarUrl = "http://i.imgur.com/Nptlyr9.jpg";
+        sToAvatarUrl = "http://i.imgur.com/oqJ9rSg.jpg";
     }
 }
