@@ -13,11 +13,8 @@
     <string name="swap_user">切换用户</string>
 
     <string name="enter_group_p2p_red_packet">进入专属红包页面</string>
-    <string name="single">单聊红包</string>
-    <string name="group">群聊红包</string>
     <string name="system">系统红包</string>
     <string name="ad">广告红包</string>
-    <string name="change">零钱页面</string>
     <string name="contact_us">联系我们</string>
     <string name="clear_cache">清除用户</string>
 
