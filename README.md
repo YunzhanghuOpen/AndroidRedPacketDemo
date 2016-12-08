@@ -10,5 +10,7 @@
 * 进入零钱页面
 * 打开红包  
 
+**具体实现可参考Demo中RedPacketUtil中的方法**
+
 ### ScreenShot
 ![image](https://cloud.githubusercontent.com/assets/3954285/21000890/37053ae0-bd58-11e6-8a2f-545e5f867600.png)
