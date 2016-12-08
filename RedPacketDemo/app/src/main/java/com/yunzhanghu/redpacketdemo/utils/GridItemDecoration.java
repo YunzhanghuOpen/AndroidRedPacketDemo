@@ -126,6 +126,9 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
         int itemPosition = parent.getChildAdapterPosition(view);
         if (isLastRow(parent, itemPosition, spanCount, childCount)) {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+            if (isLastColumn(parent, itemPosition, spanCount, childCount)) {
+                outRect.set(0, 0, 0, 0);
+            }
         } else if (isLastColumn(parent, itemPosition, spanCount, childCount)) {
             outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
         } else {
