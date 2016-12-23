@@ -20,6 +20,7 @@ import com.yunzhanghu.redpacketdemo.utils.GridItemDecoration;
 import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
 import com.yunzhanghu.redpacketdemo.utils.RecyclerItemClickListener;
 import com.yunzhanghu.redpacketdemo.utils.RedPacketUtil;
+import com.yunzhanghu.redpacketui.utils.RPRedPacketUtil;
 
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentAvatarUrl;
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentNickname;
@@ -110,7 +111,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         }).show();
                 break;
             case 4:
-                RedPacketUtil.startChangeActivity(this);
+                RPRedPacketUtil.getInstance().startChangeActivity(this);
                 break;
             case 5:
                 new AlertDialog.Builder(this)

@@ -1,22 +1,17 @@
 package com.yunzhanghu.redpacketdemo.utils;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.yunzhanghu.redpacketsdk.RPGroupMemberListener;
+import com.yunzhanghu.redpacketsdk.RPSendPacketCallback;
 import com.yunzhanghu.redpacketsdk.RPValueCallback;
 import com.yunzhanghu.redpacketsdk.RedPacket;
 import com.yunzhanghu.redpacketsdk.bean.RPUserBean;
 import com.yunzhanghu.redpacketsdk.bean.RedPacketInfo;
-import com.yunzhanghu.redpacketsdk.bean.TokenData;
 import com.yunzhanghu.redpacketsdk.constant.RPConstant;
-import com.yunzhanghu.redpacketui.ui.activity.RPChangeActivity;
-import com.yunzhanghu.redpacketui.ui.activity.RPRedPacketActivity;
-import com.yunzhanghu.redpacketui.ui.activity.RPTransferActivity;
-import com.yunzhanghu.redpacketui.ui.activity.RPTransferDetailActivity;
 import com.yunzhanghu.redpacketui.utils.RPRedPacketUtil;
 
 import java.util.ArrayList;
@@ -38,117 +33,37 @@ public class RedPacketUtil {
 
     private static int mGroupMemberCount = 10;
 
-    /**
-     * 进入红包页面
-     *
-     * @param activity    FragmentActivity
-     * @param chatType    聊天类型
-     * @param isExclusive 是否是专属红包
-     * @param requestCode requestCode
-     */
-    public static void startRedPacketForResult(FragmentActivity activity, int chatType, boolean isExclusive, int requestCode) {
-        Intent intent = new Intent(activity, RPRedPacketActivity.class);
-        intent.putExtra(RPConstant.EXTRA_RED_PACKET_INFO, getRedPacketInfo(chatType, isExclusive));
-        intent.putExtra(RPConstant.EXTRA_TOKEN_DATA, getTokenData());
-        activity.startActivityForResult(intent, requestCode);
-    }
-
-    /**
-     * 进入小额随机红包页面
-     *
-     * @param activity FragmentActivity(由于使用了DialogFragment，这个参数类型必须为FragmentActivity)
-     * @param callBack RPRandomCallback
-     */
-    public static void startRandomPacket(FragmentActivity activity, RPRedPacketUtil.RPRandomCallback callBack) {
-        //当前用户昵称和头像url
-        RedPacketInfo redPacketInfo = new RedPacketInfo();
-        redPacketInfo.chatType = RPConstant.CHATTYPE_SINGLE;
-        redPacketInfo.fromNickName = sCurrentNickname;
-        redPacketInfo.fromAvatarUrl = sCurrentAvatarUrl;
-        //接收者id、昵称和头像url
-        redPacketInfo.toUserId = sToUserId;
-        redPacketInfo.toNickName = sToNickname;
-        redPacketInfo.toAvatarUrl = sToAvatarUrl;
-        RPRedPacketUtil.getInstance().enterRandomRedPacket(redPacketInfo, getTokenData(), activity, callBack);
-    }
-
-    /**
-     * 进入转账页面
-     *
-     * @param activity    FragmentActivity
-     * @param requestCode requestCode
-     */
-    public static void startTransferActivityForResult(FragmentActivity activity, int requestCode) {
-        RedPacketInfo redPacketInfo = new RedPacketInfo();
-        //当前用户头像url、昵称
-        redPacketInfo.fromAvatarUrl = sCurrentAvatarUrl;
-        redPacketInfo.fromNickName = sCurrentNickname;
-        //接收者Id、昵称和头像url
-        redPacketInfo.toUserId = sToUserId;
-        redPacketInfo.toNickName = sToNickname;
-        redPacketInfo.toAvatarUrl = sToAvatarUrl;
-        Intent intent = new Intent(activity, RPTransferActivity.class);
-        intent.putExtra(RPConstant.EXTRA_RED_PACKET_INFO, redPacketInfo);
-        intent.putExtra(RPConstant.EXTRA_TOKEN_DATA, getTokenData());
-        activity.startActivityForResult(intent, requestCode);
-    }
-
-
-    /**
-     * 进入零钱页面
-     *
-     * @param activity FragmentActivity
-     */
-    public static void startChangeActivity(FragmentActivity activity) {
-        RedPacketInfo redPacketInfo = getCurrentUserInfo();
-        TokenData tokenData = getTokenData();
-        Intent intent = new Intent(activity, RPChangeActivity.class);
-        intent.putExtra(RPConstant.EXTRA_RED_PACKET_INFO, redPacketInfo);
-        intent.putExtra(RPConstant.EXTRA_TOKEN_DATA, tokenData);
-        activity.startActivity(intent);
+    public static void startRedPacket(FragmentActivity activity, int itemType, boolean isExclusive, RPSendPacketCallback callback) {
+        RPRedPacketUtil.getInstance().startRedPacket(activity, itemType, getRedPacketInfo(itemType, isExclusive), callback);
     }
 
 
     /**
      * 拆红包方法
      *
-     * @param activity       FragmentActivity(由于使用了DialogFragment，这个参数类型必须为FragmentActivity)
-     * @param chatType       聊天类型
-     * @param redPacketId    红包id
-     * @param redPacketType  红包类型
-     * @param receiverId     接收者id
-     * @param messageDirect  消息的方向
-     * @param isRandomPacket 是否为小额随机红包
+     * @param activity      FragmentActivity(由于使用了DialogFragment，这个参数类型必须为FragmentActivity)
+     * @param chatType      聊天类型
+     * @param redPacketId   红包id
+     * @param redPacketType 红包类型
+     * @param receiverId    接收者id
+     * @param messageDirect 消息的方向
      */
-    public static void openRedPacket(final FragmentActivity activity, final int chatType, String redPacketId, String redPacketType, String receiverId, String messageDirect, boolean isRandomPacket) {
+    public static void openRedPacket(final FragmentActivity activity, final int chatType, String redPacketId, String redPacketType, String receiverId, String messageDirect) {
         final ProgressDialog progressDialog = new ProgressDialog(activity);
         progressDialog.setCanceledOnTouchOutside(false);
         RedPacketInfo redPacketInfo = new RedPacketInfo();
         redPacketInfo.redPacketId = redPacketId;
-        //由于UI展示的需要，区别于拆其他红包这里需要传入红包接收者id、昵称和头像Url
-        if (isRandomPacket) {
-            redPacketInfo.toUserId = receiverId;
-            if (messageDirect.equals(RPConstant.MESSAGE_DIRECT_SEND)) {
-                redPacketInfo.toNickName = sToNickname;
-                redPacketInfo.toAvatarUrl = sToAvatarUrl;
-            } else {
-                redPacketInfo.toNickName = sCurrentNickname;
-                redPacketInfo.toAvatarUrl = sCurrentAvatarUrl;
-            }
-        } else {
-            //传入当前用户id、昵称和头像url
-            redPacketInfo.toUserId = sCurrentUserId;
-            redPacketInfo.toNickName = sCurrentNickname;
-            redPacketInfo.toAvatarUrl = sCurrentAvatarUrl;
-        }
-        redPacketInfo.moneyMsgDirect = messageDirect;
+        redPacketInfo.messageDirect = messageDirect;
         redPacketInfo.chatType = chatType;
+        redPacketInfo.redPacketType = redPacketType;
+        //如果在3.4.0之前使用过红包SDK,并已经有上线版本，需要添加如下代码对旧版做兼容;处于开发阶段的用户可以不添加。
         if (!TextUtils.isEmpty(redPacketType) && redPacketType.equals(RPConstant.GROUP_RED_PACKET_TYPE_EXCLUSIVE)) {
             //根据receiverId来获取专属红包接收者的头像url和昵称
             redPacketInfo.specialAvatarUrl = "testUrl";
             redPacketInfo.specialNickname = findNicknameByUserId(receiverId);
         }
-        RPRedPacketUtil.getInstance().openRedPacket(redPacketInfo, getTokenData(), activity, new RPRedPacketUtil.RPOpenPacketCallback() {
+        //兼容 end
+        RPRedPacketUtil.getInstance().openRedPacket(redPacketInfo, activity, new RPRedPacketUtil.RPOpenPacketCallback() {
             @Override
             public void onSuccess(String senderId, String senderNickname, String myAmount) {
                 //领取红包成功 发送回执消息到聊天窗口
@@ -174,6 +89,8 @@ public class RedPacketUtil {
 
     /**
      * 拆转账红包方法
+     * <p>
+     * 由于打开转账传入参数和拆红包方法无法兼容，这里独立封装了一个方法
      *
      * @param activity       FragmentActivity
      * @param messageDirect  消息的方向
@@ -182,32 +99,27 @@ public class RedPacketUtil {
      */
     public static void openTransferPacket(FragmentActivity activity, String messageDirect, String transferAmount, String transferTime) {
         RedPacketInfo redPacketInfo = new RedPacketInfo();
-        redPacketInfo.moneyMsgDirect = messageDirect;
-        redPacketInfo.fromNickName = sCurrentNickname;
-        redPacketInfo.fromAvatarUrl = sCurrentAvatarUrl;
+        redPacketInfo.messageDirect = messageDirect;
         redPacketInfo.redPacketAmount = transferAmount;
         redPacketInfo.transferTime = transferTime;
-        Intent intent = new Intent(activity, RPTransferDetailActivity.class);
-        intent.putExtra(RPConstant.EXTRA_RED_PACKET_INFO, redPacketInfo);
-        intent.putExtra(RPConstant.EXTRA_TOKEN_DATA, getTokenData());
-        activity.startActivity(intent);
+        RPRedPacketUtil.getInstance().openTransferPacket(activity, redPacketInfo);
     }
 
     /**
-     * 进入红包页面所需参数的包装方法
+     * 封装进入红包、转账页面所需参数
      *
-     * @param chatType    聊天类型（单聊1，群聊2）
+     * @param itemType    项目类型：
+     *                    (单聊红包：RPConstant.RP_ITEM_TYPE_SINGLE
+     *                    群聊红包：RPConstant.RP_ITEM_TYPE_GROUP
+     *                    小额随机红包：RPConstant.RP_ITEM_TYPE_RANDOM
+     *                    转账：RPConstant.RP_ITEM_TYPE_TRANSFER）
      * @param isExclusive 是否为专属红包
      * @return RedPacketInfo
      */
-    private static RedPacketInfo getRedPacketInfo(int chatType, boolean isExclusive) {
+    private static RedPacketInfo getRedPacketInfo(int itemType, boolean isExclusive) {
         RedPacketInfo redPacketInfo = getCurrentUserInfo();
-        //聊天类型
-        redPacketInfo.chatType = chatType;
-        if (chatType == RPConstant.CHATTYPE_SINGLE) {
-            //单聊红包传入 ：接收者Id
-            redPacketInfo.toUserId = sToUserId;
-        } else {
+        //项目类型
+        if (itemType == RPConstant.RP_ITEM_TYPE_GROUP) {
             //群聊红包传入 ：群组Id和群成员个数
             redPacketInfo.toGroupId = "testGroupId";
             redPacketInfo.groupMemberCount = mGroupMemberCount;
@@ -223,23 +135,22 @@ public class RedPacketUtil {
                 //Demo演示使用，如果不需要专属红包，不设置该回调即可。
                 RedPacket.getInstance().setRPGroupMemberListener(null);
             }
+        } else {
+            //单聊红包、小额随机红包和转账都只传入 ：接收者Id、昵称和头像
+            redPacketInfo.toUserId = sToUserId;
+            redPacketInfo.toNickName = sToNickname;
+            redPacketInfo.toAvatarUrl = sToAvatarUrl;
         }
         return redPacketInfo;
     }
 
-    private static TokenData getTokenData() {
-        TokenData tokenData = new TokenData();
-        //当前用户id，必传参数，用于SDK区分是否切换用户
-        tokenData.appUserId = sCurrentUserId;
-        return tokenData;
-    }
 
     /**
      * 模拟获取当前用户信息的方法
      *
      * @return RedPacketInfo
      */
-    private static RedPacketInfo getCurrentUserInfo() {
+    public static RedPacketInfo getCurrentUserInfo() {
         RedPacketInfo redPacketInfo = new RedPacketInfo();
         //红包发送者昵称 不可为空
         redPacketInfo.fromNickName = sCurrentNickname;
@@ -302,7 +213,7 @@ public class RedPacketUtil {
             typeStr = "普通群红包";
         } else if (redPacketType.equals(RPConstant.GROUP_RED_PACKET_TYPE_EXCLUSIVE)) {
             typeStr = "专属红包";
-        } else if (redPacketType.equals(RPConstant.RANDOM_PACKET_TYPE)) {
+        } else if (redPacketType.equals(RPConstant.RED_PACKET_TYPE_RANDOM)) {
             typeStr = "小额随机红包";
         }
         return typeStr;
@@ -313,7 +224,7 @@ public class RedPacketUtil {
      */
     public static void initUserInfo() {
         //缓存用户信息到本地
-        sCurrentNickname = PreferenceUtil.getInstance().getSenderName();
+        sCurrentNickname = "Max";
         sToNickname = PreferenceUtil.getInstance().getReceiverName();
         //使用昵称做为种子生成的用户id，实际开发中需传入APP生成的用户id
         sCurrentUserId = UUID.nameUUIDFromBytes(sCurrentNickname.getBytes()).toString();

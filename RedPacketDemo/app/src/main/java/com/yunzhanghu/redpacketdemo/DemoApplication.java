@@ -6,9 +6,11 @@ import android.util.Log;
 import com.yunzhanghu.redpacketdemo.api.SignService;
 import com.yunzhanghu.redpacketdemo.model.SignModel;
 import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
-import com.yunzhanghu.redpacketsdk.RPRefreshSignListener;
+import com.yunzhanghu.redpacketdemo.utils.RedPacketUtil;
+import com.yunzhanghu.redpacketsdk.RPInitRedPacketCallback;
 import com.yunzhanghu.redpacketsdk.RPValueCallback;
 import com.yunzhanghu.redpacketsdk.RedPacket;
+import com.yunzhanghu.redpacketsdk.bean.RedPacketInfo;
 import com.yunzhanghu.redpacketsdk.bean.TokenData;
 import com.yunzhanghu.redpacketsdk.constant.RPConstant;
 
@@ -62,15 +64,12 @@ public class DemoApplication extends Application {
 
     private void initRedPacket() {
         //初始化红包SDK
-        RedPacket.getInstance().initContext(this, RPConstant.AUTH_METHOD_SIGN);
-        //开启红包相关日志输出
-        RedPacket.getInstance().setDebugMode(true);
-        //设置刷新签名的回调函数
-        //说明 ：该回调函数在红包token不存在、切换用户、红包token过期、签名过期的情况下触发。
-        //注意 ：以上情况不需要开发者维护，由红包SDK在请求红包相关服务时进行处理。
-        RedPacket.getInstance().setRefreshSignListener(new RPRefreshSignListener() {
+        RedPacket.getInstance().initRedPacket(this, RPConstant.AUTH_METHOD_SIGN, new RPInitRedPacketCallback() {
+            //设置初始化TokenData的回调函数
+            //说明 ：该回调函数在红包token不存在、切换用户、红包token过期、签名过期的情况下触发。
+            //注意 ：以上情况不需要开发者维护，由红包SDK在请求红包相关服务时进行处理。
             @Override
-            public void onRefreshSign(final RPValueCallback<TokenData> callback) {
+            public void initTokenData(final RPValueCallback<TokenData> callback) {
                 //异步向App Server获取签名参数
                 //这里使用随机生成的UUID代替App中的userId,生产环境需要传入App的userId
                 String token = "tempValue";
@@ -109,8 +108,14 @@ public class DemoApplication extends Application {
                         callback.onError("onFailure", t.getMessage());
                     }
                 });
+            }
 
+            @Override
+            public RedPacketInfo initCurrentUserSync() {
+                return RedPacketUtil.getCurrentUserInfo();
             }
         });
+        //开启红包相关日志输出
+        RedPacket.getInstance().setDebugMode(true);
     }
 }

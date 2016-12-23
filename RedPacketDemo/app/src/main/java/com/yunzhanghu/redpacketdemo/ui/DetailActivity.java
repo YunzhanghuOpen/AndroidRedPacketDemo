@@ -1,6 +1,5 @@
 package com.yunzhanghu.redpacketdemo.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -10,8 +9,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yunzhanghu.redpacketdemo.R;
 import com.yunzhanghu.redpacketdemo.utils.CircleTransform;
+import com.yunzhanghu.redpacketsdk.RPSendPacketCallback;
+import com.yunzhanghu.redpacketsdk.bean.RedPacketInfo;
 import com.yunzhanghu.redpacketsdk.constant.RPConstant;
-import com.yunzhanghu.redpacketui.utils.RPRedPacketUtil;
 
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentAvatarUrl;
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sCurrentNickname;
@@ -22,17 +22,11 @@ import static com.yunzhanghu.redpacketdemo.DemoApplication.sToUserId;
 import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.getRedPacketType;
 import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.openRedPacket;
 import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.openTransferPacket;
-import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.startRandomPacket;
-import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.startRedPacketForResult;
-import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.startTransferActivityForResult;
+import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.startRedPacket;
 
 public class DetailActivity extends FragmentActivity implements View.OnClickListener {
 
     private static final String TAG = "DetailActivity";
-
-    private static final int RED_PACKET_REQUEST_CODE = 1;
-
-    private static final int TRANSFER_PACKET_REQUEST_CODE = 2;
 
     private String mRedPacketId;
 
@@ -96,8 +90,6 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
 
     private TextView mTvRedPacketType;
 
-    private boolean mIsRandomPacket;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,83 +146,61 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+        boolean isExclusive = false;
+        int itemType = 0;
         switch (view.getId()) {
             case R.id.btn_enter_single_red_packet:
                 mChatType = RPConstant.CHATTYPE_SINGLE;
-                startRedPacketForResult(this, mChatType, false, RED_PACKET_REQUEST_CODE);
+                itemType = RPConstant.RP_ITEM_TYPE_SINGLE;
                 break;
             case R.id.btn_enter_random_packet:
-                mIsRandomPacket = true;
                 mChatType = RPConstant.CHATTYPE_SINGLE;
-                startRandomPacket(this, new RPRedPacketUtil.RPRandomCallback() {
-                    @Override
-                    public void onSendPacketSuccess(Intent intent) {
-                        clearMessageBubble();
-                        mRedPacketId = intent.getStringExtra(RPConstant.EXTRA_RED_PACKET_ID);
-                        mRedPacketType = intent.getStringExtra(RPConstant.EXTRA_RED_PACKET_TYPE);
-                        String greetings = intent.getStringExtra(RPConstant.EXTRA_RED_PACKET_GREETING);
-                        mReceiverId = intent.getStringExtra(RPConstant.EXTRA_RED_PACKET_RECEIVER_ID);
-                        String senderNickname = intent.getStringExtra(RPConstant.EXTRA_RED_PACKET_SENDER_NAME);
-                        showRedPacketMsg(greetings);
-                    }
-
-                    @Override
-                    public void switchToNormalPacket() {
-                        mChatType = RPConstant.CHATTYPE_SINGLE;
-                        startRedPacketForResult(DetailActivity.this, RPConstant.CHATTYPE_SINGLE, true, RED_PACKET_REQUEST_CODE);
-                    }
-                });
+                itemType = RPConstant.RP_ITEM_TYPE_RANDOM;
                 break;
             case R.id.btn_enter_group_red_packet:
                 mChatType = RPConstant.CHATTYPE_GROUP;
-                startRedPacketForResult(this, mChatType, false, RED_PACKET_REQUEST_CODE);
+                itemType = RPConstant.RP_ITEM_TYPE_GROUP;
                 break;
             case R.id.btn_enter_group_p2p_red_packet:
+                isExclusive = true;
                 mChatType = RPConstant.CHATTYPE_GROUP;
-                startRedPacketForResult(this, mChatType, true, RED_PACKET_REQUEST_CODE);
+                itemType = RPConstant.RP_ITEM_TYPE_GROUP;
                 break;
             case R.id.btn_enter_transfer_packet:
-                startTransferActivityForResult(this, TRANSFER_PACKET_REQUEST_CODE);
+                mChatType = RPConstant.CHATTYPE_SINGLE;
+                itemType = RPConstant.RP_ITEM_TYPE_TRANSFER;
                 break;
             case R.id.btn_swap_user:
                 swapUser();
                 break;
             case R.id.layout_red_packet_send:
             case R.id.layout_red_packet_receive:
-                openRedPacket(this, mChatType, mRedPacketId, mRedPacketType, mReceiverId, mCurrentDirect, mIsRandomPacket);
+                openRedPacket(this, mChatType, mRedPacketId, mRedPacketType, mReceiverId, mCurrentDirect);
                 break;
             case R.id.layout_transfer_send:
             case R.id.layout_transfer_receive:
                 openTransferPacket(this, mCurrentDirect, mTransferAmount, mTransferTime);
                 break;
-            default:
-                mIsRandomPacket = false;
-                break;
         }
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && data != null) {
-            clearMessageBubble();
-            switch (requestCode) {
-                case RED_PACKET_REQUEST_CODE:
-                    //发送红包成功后回调到该方法
-                    mRedPacketId = data.getStringExtra(RPConstant.EXTRA_RED_PACKET_ID);
-                    mRedPacketType = data.getStringExtra(RPConstant.EXTRA_RED_PACKET_TYPE);
-                    String greetings = data.getStringExtra(RPConstant.EXTRA_RED_PACKET_GREETING);
-                    mReceiverId = data.getStringExtra(RPConstant.EXTRA_RED_PACKET_RECEIVER_ID);
-                    String senderNickname = data.getStringExtra(RPConstant.EXTRA_RED_PACKET_SENDER_NAME);
-                    showRedPacketMsg(greetings);
-                    break;
-                case TRANSFER_PACKET_REQUEST_CODE:
-                    mTransferAmount = data.getStringExtra(RPConstant.EXTRA_TRANSFER_AMOUNT);
-                    mTransferTime = data.getStringExtra(RPConstant.EXTRA_TRANSFER_PACKET_TIME);
-                    showTransferMsg();
-                    break;
-            }
+        if (itemType != 0) {
+            startRedPacket(this, itemType, isExclusive, new RPSendPacketCallback() {
+                @Override
+                public void onSendPacketSuccess(RedPacketInfo redPacketInfo) {
+                    clearMessageBubble();
+                    if (redPacketInfo.redPacketType.equals(RPConstant.RED_PACKET_TYPE_TRANSFER)) {
+                        mTransferAmount = redPacketInfo.redPacketAmount;
+                        mTransferTime = redPacketInfo.transferTime;
+                        showTransferMsg();
+                    } else {
+                        mRedPacketId = redPacketInfo.redPacketId;
+                        mRedPacketType = redPacketInfo.redPacketType;
+                        String greetings = redPacketInfo.redPacketGreeting;
+                        mReceiverId = redPacketInfo.toUserId;
+                        String senderNickname = redPacketInfo.fromNickName;
+                        showRedPacketMsg(greetings);
+                    }
+                }
+            });
         }
     }
 
