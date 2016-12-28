@@ -55,7 +55,6 @@ public class RedPacketUtil {
         redPacketInfo.redPacketId = redPacketId;
         redPacketInfo.messageDirect = messageDirect;
         redPacketInfo.chatType = chatType;
-        redPacketInfo.redPacketType = redPacketType;
         //如果在3.4.0之前使用过红包SDK,并已经有上线版本，需要添加如下代码对旧版做兼容;处于开发阶段的用户可以不添加。
         if (!TextUtils.isEmpty(redPacketType) && redPacketType.equals(RPConstant.GROUP_RED_PACKET_TYPE_EXCLUSIVE)) {
             //根据receiverId来获取专属红包接收者的头像url和昵称
