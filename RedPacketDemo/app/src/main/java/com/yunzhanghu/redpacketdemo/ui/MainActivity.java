@@ -1,8 +1,10 @@
 package com.yunzhanghu.redpacketdemo.ui;
 
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,10 +13,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yunzhanghu.redpacketdemo.R;
 import com.yunzhanghu.redpacketdemo.adapter.RecyclerAdapter;
+import com.yunzhanghu.redpacketdemo.runtimepermissions.PermissionsManager;
+import com.yunzhanghu.redpacketdemo.runtimepermissions.PermissionsResultAction;
 import com.yunzhanghu.redpacketdemo.utils.CircleTransform;
 import com.yunzhanghu.redpacketdemo.utils.GridItemDecoration;
 import com.yunzhanghu.redpacketdemo.utils.PreferenceUtil;
@@ -51,6 +56,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         recyclerView.addItemDecoration(new GridItemDecoration(this));
         recyclerView.setAdapter(new RecyclerAdapter());
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, this));
+        requestPermissions();
     }
 
     @Override
@@ -128,5 +134,26 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if (intent != null) {
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
+    }
+
+    @TargetApi(23)
+    private void requestPermissions() {
+        PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
+            @Override
+            public void onGranted() {
+//				Toast.makeText(MainActivity.this, "All permissions have been granted", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDenied(String permission) {
+                Toast.makeText(MainActivity.this, "Permission " + permission + " has been denied", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
