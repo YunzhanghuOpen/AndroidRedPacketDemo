@@ -111,7 +111,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         }).show();
                 break;
             case 4:
-                RPRedPacketUtil.getInstance().startChangeActivity(this);
+                RPRedPacketUtil.getInstance().startRecordActivity(this);
                 break;
             case 5:
                 new AlertDialog.Builder(this)

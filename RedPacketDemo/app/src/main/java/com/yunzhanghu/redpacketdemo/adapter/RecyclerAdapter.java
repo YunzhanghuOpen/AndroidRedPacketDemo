@@ -14,7 +14,7 @@ import com.yunzhanghu.redpacketdemo.R;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private String[] mStrArrays = {"单聊红包", "群聊红包", "系统红包", "广告页面", "零钱页面", "联系我们"};
+    private String[] mStrArrays = {"单聊红包", "群聊红包", "系统红包", "广告红包", "红包记录", "联系我们"};
 
     public RecyclerAdapter() {
     }

@@ -55,13 +55,6 @@ public class RedPacketUtil {
         redPacketInfo.redPacketId = redPacketId;
         redPacketInfo.messageDirect = messageDirect;
         redPacketInfo.chatType = chatType;
-        //如果在3.4.0之前使用过红包SDK,并已经有上线版本，需要添加如下代码对旧版做兼容;处于开发阶段的用户可以不添加。
-        if (!TextUtils.isEmpty(redPacketType) && redPacketType.equals(RPConstant.GROUP_RED_PACKET_TYPE_EXCLUSIVE)) {
-            //根据receiverId来获取专属红包接收者的头像url和昵称
-            redPacketInfo.specialAvatarUrl = "testUrl";
-            redPacketInfo.specialNickname = findNicknameByUserId(receiverId);
-        }
-        //兼容 end
         RPRedPacketUtil.getInstance().openRedPacket(redPacketInfo, activity, new RPRedPacketUtil.RPOpenPacketCallback() {
             @Override
             public void onSuccess(String senderId, String senderNickname, String myAmount) {
@@ -86,32 +79,14 @@ public class RedPacketUtil {
         });
     }
 
-    /**
-     * 拆转账红包方法
-     * <p>
-     * 由于打开转账传入参数和拆红包方法无法兼容，这里独立封装了一个方法
-     *
-     * @param activity       FragmentActivity
-     * @param messageDirect  消息的方向
-     * @param transferAmount 转账金额
-     * @param transferTime   转账时间
-     */
-    public static void openTransferPacket(FragmentActivity activity, String messageDirect, String transferAmount, String transferTime) {
-        RedPacketInfo redPacketInfo = new RedPacketInfo();
-        redPacketInfo.messageDirect = messageDirect;
-        redPacketInfo.redPacketAmount = transferAmount;
-        redPacketInfo.transferTime = transferTime;
-        RPRedPacketUtil.getInstance().openTransferPacket(activity, redPacketInfo);
-    }
 
     /**
-     * 封装进入红包、转账页面所需参数
+     * 封装进入红包页面所需参数
      *
      * @param itemType    项目类型：
      *                    (单聊红包：RPConstant.RP_ITEM_TYPE_SINGLE
      *                    群聊红包：RPConstant.RP_ITEM_TYPE_GROUP
-     *                    小额随机红包：RPConstant.RP_ITEM_TYPE_RANDOM
-     *                    转账：RPConstant.RP_ITEM_TYPE_TRANSFER）
+     *                    小额随机红包：RPConstant.RP_ITEM_TYPE_RANDOM)
      * @param isExclusive 是否为专属红包
      * @return RedPacketInfo
      */
@@ -178,25 +153,6 @@ public class RedPacketUtil {
     }
 
     /**
-     * 模拟通过用户id 获取用户昵称的方法
-     *
-     * @param userId 用户id
-     * @return 用户昵称
-     */
-    private static String findNicknameByUserId(String userId) {
-        String nickname = "";
-        List<RPUserBean> userBeanList = generateGroupMemberList(mGroupMemberCount);
-        for (int i = 0; i < userBeanList.size(); i++) {
-            if (userBeanList.get(i).userId.equals(userId)) {
-                nickname = userBeanList.get(i).userNickname;
-                break;
-            }
-        }
-        return nickname;
-    }
-
-
-    /**
      * 红包类型的转义方法 用于展示红包的类型
      *
      * @param redPacketType 红包类型
@@ -223,7 +179,7 @@ public class RedPacketUtil {
      */
     public static void initUserInfo() {
         //缓存用户信息到本地
-        sCurrentNickname = "Max";
+        sCurrentNickname = PreferenceUtil.getInstance().getSenderName();
         sToNickname = PreferenceUtil.getInstance().getReceiverName();
         //使用昵称做为种子生成的用户id，实际开发中需传入APP生成的用户id
         sCurrentUserId = UUID.nameUUIDFromBytes(sCurrentNickname.getBytes()).toString();

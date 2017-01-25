@@ -21,7 +21,6 @@ import static com.yunzhanghu.redpacketdemo.DemoApplication.sToNickname;
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sToUserId;
 import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.getRedPacketType;
 import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.openRedPacket;
-import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.openTransferPacket;
 import static com.yunzhanghu.redpacketdemo.utils.RedPacketUtil.startRedPacket;
 
 public class DetailActivity extends FragmentActivity implements View.OnClickListener {
@@ -98,7 +97,6 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
         findViewById(R.id.btn_enter_single_red_packet).setOnClickListener(this);
         findViewById(R.id.btn_enter_group_red_packet).setOnClickListener(this);
         findViewById(R.id.btn_enter_group_p2p_red_packet).setOnClickListener(this);
-        findViewById(R.id.btn_enter_transfer_packet).setOnClickListener(this);
         findViewById(R.id.btn_swap_user).setOnClickListener(this);
         findViewById(R.id.btn_enter_random_packet).setOnClickListener(this);
         mSendPacketLayout = findViewById(R.id.layout_red_packet_send);
@@ -166,10 +164,6 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
                 mChatType = RPConstant.CHATTYPE_GROUP;
                 itemType = RPConstant.RP_ITEM_TYPE_GROUP;
                 break;
-            case R.id.btn_enter_transfer_packet:
-                mChatType = RPConstant.CHATTYPE_SINGLE;
-                itemType = RPConstant.RP_ITEM_TYPE_TRANSFER;
-                break;
             case R.id.btn_swap_user:
                 swapUser();
                 break;
@@ -179,26 +173,24 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
                 break;
             case R.id.layout_transfer_send:
             case R.id.layout_transfer_receive:
-                openTransferPacket(this, mCurrentDirect, mTransferAmount, mTransferTime);
                 break;
         }
         if (itemType != 0) {
             startRedPacket(this, itemType, isExclusive, new RPSendPacketCallback() {
                 @Override
+                public void onGenerateRedPacketId(String redPacketId) {
+
+                }
+
+                @Override
                 public void onSendPacketSuccess(RedPacketInfo redPacketInfo) {
                     clearMessageBubble();
-                    if (redPacketInfo.redPacketType.equals(RPConstant.RED_PACKET_TYPE_TRANSFER)) {
-                        mTransferAmount = redPacketInfo.redPacketAmount;
-                        mTransferTime = redPacketInfo.transferTime;
-                        showTransferMsg();
-                    } else {
-                        mRedPacketId = redPacketInfo.redPacketId;
-                        mRedPacketType = redPacketInfo.redPacketType;
-                        String greetings = redPacketInfo.redPacketGreeting;
-                        mReceiverId = redPacketInfo.toUserId;
-                        String senderNickname = redPacketInfo.fromNickName;
-                        showRedPacketMsg(greetings);
-                    }
+                    mRedPacketId = redPacketInfo.redPacketId;
+                    mRedPacketType = redPacketInfo.redPacketType;
+                    String greetings = redPacketInfo.redPacketGreeting;
+                    mReceiverId = redPacketInfo.toUserId;
+                    String senderNickname = redPacketInfo.fromNickName;
+                    showRedPacketMsg(greetings);
                 }
             });
         }
@@ -225,18 +217,6 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
         mSendPacketLayout.setVisibility(View.VISIBLE);
         mTvRedPacketType.setVisibility(View.VISIBLE);
         mTvRedPacketType.setText(String.format(getString(R.string.str_red_packet_type), getRedPacketType(mRedPacketType)));
-    }
-
-    /**
-     * 模拟在IM页面中展示转账消息卡片
-     */
-    private void showTransferMsg() {
-        mHasSentTransferPacket = true;
-        mHasSentRedPacket = false;
-        mTvTransferSenderName.setText(sCurrentNickname);
-        Glide.with(this).load(sCurrentAvatarUrl).error(R.drawable.default_avatar).placeholder(R.drawable.default_avatar).transform(new CircleTransform(this)).into(mIvTransferSendAvatar);
-        mTvSendTransfer.setText(String.format(getString(R.string.msg_transfer_from_you), mTransferAmount));
-        mSendTransferLayout.setVisibility(View.VISIBLE);
     }
 
     /**
