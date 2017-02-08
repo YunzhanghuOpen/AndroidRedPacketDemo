@@ -1,6 +1,6 @@
 
 
-# 云账户红包SDK接入指南(支付宝版1.0.0)
+# 云账户红包SDK接入指南(支付宝版1.0.1)
 
 ## 一、依赖红包SDK
 
@@ -18,7 +18,7 @@ allprojects {
 #####步骤2.在app的build.gradle(module build file)中添加红包SDK以及红包使用的三方库依赖
 ```java
 dependencies {
-    compile 'com.yunzhanghu.redpacket:redpacket-alipay:1.0.0@aar'
+    compile 'com.yunzhanghu.redpacket:redpacket-alipay:1.0.1@aar'
     compile files('libs/glide-3.7.0.jar')
     compile files('libs/alipaySdk-20161129.jar')
     compile files('libs/volley-1.0.19.jar')
