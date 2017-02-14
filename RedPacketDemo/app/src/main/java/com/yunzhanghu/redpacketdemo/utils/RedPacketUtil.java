@@ -223,7 +223,7 @@ public class RedPacketUtil {
      */
     public static void initUserInfo() {
         //缓存用户信息到本地
-        sCurrentNickname = "Max";
+        sCurrentNickname = PreferenceUtil.getInstance().getSenderName();
         sToNickname = PreferenceUtil.getInstance().getReceiverName();
         //使用昵称做为种子生成的用户id，实际开发中需传入APP生成的用户id
         sCurrentUserId = UUID.nameUUIDFromBytes(sCurrentNickname.getBytes()).toString();
