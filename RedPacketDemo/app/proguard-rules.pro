@@ -27,6 +27,7 @@
 -keep class com.ut.device.**{*;} 
 -keep class org.json.alipay.**{*;}
  -keepattributes EnclosingMethod 
+
 -dontwarn com.tencent.** 
 -keep class org.w3c.dom.**{*;}
  -dontwarn org.w3c.dom.** 
@@ -38,3 +39,10 @@
  -dontwarn java.lang.invoke.** 
 -keep class org.codehaus.mojo.animal_sniffer.**{*;}
  -dontwarn org.codehaus.mojo.animal_sniffer.**
+# OkHttp3
+-dontwarn okhttp3.logging.**
+-keep class okhttp3.internal.**{*;}
+-dontwarn okio.**
+# Retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
