@@ -200,6 +200,11 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
                         showRedPacketMsg(greetings);
                     }
                 }
+
+                @Override
+                public void onGenerateRedPacketId(String redPacketId) {
+
+                }
             });
         }
     }
