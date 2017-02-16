@@ -10,13 +10,26 @@ android {
         versionCode 2
         versionName "2.0"
     }
-    buildTypes {
+    signingConfigs {
+
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file("../keystore.jks")
+            storePassword "123456"
+            keyAlias "yunyu"
+            keyPassword "123456"
         }
     }
+    buildTypes {
 
+        release {
+
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
