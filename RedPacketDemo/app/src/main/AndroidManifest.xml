@@ -46,16 +46,6 @@
             android:name="com.yunzhanghu.redpacketui.ui.activity.RPWebViewActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <!-- 零钱 -->
-        <activity
-            android:name="com.yunzhanghu.redpacketui.ui.activity.RPChangeActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <!-- 绑定银行卡 -->
-        <activity
-            android:name="com.yunzhanghu.redpacketui.ui.activity.RPBankCardActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <!-- 群成员列表页 -->
         <activity
             android:name="com.yunzhanghu.redpacketui.ui.activity.RPGroupMemberActivity"
@@ -68,16 +58,12 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <!-- 转账页面 -->
         <activity
-            android:name="com.yunzhanghu.redpacketui.ui.activity.RPTransferActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <!-- 转账详情页面 -->
-        <activity
-            android:name="com.yunzhanghu.redpacketui.ui.activity.RPTransferDetailActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <!-- 红包相关Activity end -->
 
     </application>
