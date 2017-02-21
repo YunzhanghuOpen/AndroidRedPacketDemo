@@ -40,7 +40,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.yunzhanghu.redpacket:redpacket-alipay:1.1.0'
+    compile 'com.yunzhanghu.redpacket:redpacket-alipay:1.1.0@aar'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
     compile 'com.android.support:design:25.1.1'
