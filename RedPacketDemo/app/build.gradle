@@ -7,24 +7,13 @@ android {
         applicationId "com.yunzhanghu.redpacketdemo"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 3
-        versionName "3.0"
-    }
-    signingConfigs{
-        release{
-            storeFile file("../keystore.jks")
-            storePassword "123456"
-            keyAlias "yunyu"
-            keyPassword "123456"
-        }
+        versionCode 4
+        versionName "4.0"
     }
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 
@@ -40,10 +29,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.yunzhanghu.redpacket:redpacket-alipay:1.1.0@aar'
+    compile 'com.yunzhanghu.redpacket:redpacket-alipay:1.1.1@aar'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
-    compile 'com.android.support:design:25.1.1'
-    compile 'com.android.support:support-v4:25.1.1'
-    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:support-v4:25.2.0'
+    compile 'com.android.support:recyclerview-v7:25.2.0'
 }

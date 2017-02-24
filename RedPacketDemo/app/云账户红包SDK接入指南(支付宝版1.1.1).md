@@ -1,6 +1,6 @@
 
 
-# 云账户红包SDK接入指南(支付宝版1.0.1)
+# 云账户红包SDK接入指南(支付宝版1.1.1)
 
 ## 一、依赖红包SDK
 
@@ -18,7 +18,8 @@ allprojects {
 #####步骤2.在app的build.gradle(module build file)中添加红包SDK以及红包使用的三方库依赖
 ```java
 dependencies {
-    compile 'com.yunzhanghu.redpacket:redpacket-alipay:1.0.1@aar'
+    //更新红包SDK时只需要需要修改版本号即可。例如1.1.1修改为1.1.2。
+    compile 'com.yunzhanghu.redpacket:redpacket-alipay:1.1.1@aar'
     compile files('libs/glide-3.7.0.jar')
     compile files('libs/alipaySdk-20161129.jar')
     compile files('libs/volley-1.0.19.jar')
@@ -31,45 +32,40 @@ dependencies {
 ### 1.配置清单文件
 
 ```java
-<!-- 声明Activity -->
+<!--发红包页面-->
 <activity
-  android:name="com.yunzhanghu.redpacketui.ui.activity.RPRedPacketActivity"
-  android:screenOrientation="portrait"
-  android:windowSoftInputMode="adjustPan|stateVisible" />      
-    
+   android:name="com.yunzhanghu.redpacketui.ui.activity.RPRedPacketActivity"
+   android:screenOrientation="portrait"
+   android:windowSoftInputMode="adjustPan|stateVisible"/>
+<!--红包详情页面-->          
 <activity
-  android:name="com.yunzhanghu.redpacketui.ui.activity.RPDetailActivity"
-  android:screenOrientation="portrait"
-  android:windowSoftInputMode="adjustPan" />
-    
+   android:name="com.yunzhanghu.redpacketui.ui.activity.RPDetailActivity"
+   android:screenOrientation="portrait"
+   android:windowSoftInputMode="adjustPan"/>
+<!--红包记录页面-->
 <activity
-  android:name="com.yunzhanghu.redpacketui.ui.activity.RPRecordActivity"
-  android:screenOrientation="portrait"
-  android:windowSoftInputMode="adjustPan" />
-    
+   android:name="com.yunzhanghu.redpacketui.ui.activity.RPRecordActivity"
+   android:screenOrientation="portrait"
+   android:windowSoftInputMode="adjustPan"/>
+<!--群成员列表页面-->
 <activity
-  android:name="com.yunzhanghu.redpacketui.ui.activity.RPWebViewActivity"
-  android:screenOrientation="portrait"
-  android:windowSoftInputMode="adjustResize|stateHidden" /> 
-    
+   android:name="com.yunzhanghu.redpacketui.ui.activity.RPGroupMemberActivity"
+   android:screenOrientation="portrait"
+   android:windowSoftInputMode="adjustPan|stateHidden"/>
+<!--支付宝H5支付页面-->          
 <activity
-  android:name="com.yunzhanghu.redpacketui.ui.activity.RPGroupMemberActivity"
-  android:screenOrientation="portrait"
-  android:windowSoftInputMode="adjustPan|stateHidden" />   
-          
+   android:name="com.alipay.sdk.app.H5PayActivity"
+   android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+   android:exported="false"
+   android:screenOrientation="behind"
+   android:windowSoftInputMode="adjustResize|stateHidden" /> 
+<!--支付宝H5授权页面-->          
 <activity
-  android:name="com.alipay.sdk.app.H5PayActivity"
-  android:configChanges="orientation|keyboardHidden|navigation|screenSize"
-  android:exported="false"
-  android:screenOrientation="behind"
-  android:windowSoftInputMode="adjustResize|stateHidden" />  
-  
-<activity
-  android:name="com.alipay.sdk.app.H5AuthActivity"
-  android:configChanges="orientation|keyboardHidden|navigation"
-  android:exported="false"
-  android:screenOrientation="behind"
-  android:windowSoftInputMode="adjustResize|stateHidden"/>    
+   android:name="com.alipay.sdk.app.H5AuthActivity"
+   android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+   android:exported="false"
+   android:screenOrientation="behind"
+   android:windowSoftInputMode="adjustResize|stateHidden"/>
 <!-- 配置权限 -->
 <uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -86,13 +82,17 @@ dependencies {
 RedPacket.getInstance().initRedPacket(context, RPConstant.AUTH_METHOD_SIGN, new RPInitRedPacketCallback() {
             @Override
             public void initTokenData(RPValueCallback<TokenData> callback) {
-                // TokenData中的四个参数需要开发者向自己的Server获取 
+                // TokenData中的四个参数需要开发者请求APP Server的签名接口获取。
          		TokenData tokenData = new TokenData();
+                // authPartner为商户id，需要在云账户官网注册商户后获取
          		tokenData.authPartner = authPartner;
+                // 用户id
          		tokenData.appUserId = appUserId;
+                // 时间戳
          		tokenData.timestamp = authTimestamp;
+                // 签名
          		tokenData.authSign = authSign;
-         		// 请求签名参数成功后,回调给红包SDK.
+         		// 请求签名接口成功后,回调给红包SDK.
          		callback.onSuccess(tokenData);
             }
             @Override
@@ -132,6 +132,8 @@ RedPacket.getInstance().setDebugMode(true);
 
 **使用签名方式获取红包Token时，authMethod赋值必须为RPConstant.AUTH_METHOD_SIGN。**
 
+* **注意：App Server提供的获取签名的接口必须先验证用户身份，并保证签名的用户和该登录用户一致，防止该接口被滥用。详见云账户[REST API开发文档](http://yunzhanghu-com.oss-cn-qdjbp-a.aliyuncs.com/%E4%BA%91%E8%B4%A6%E6%88%B7%E7%BA%A2%E5%8C%85%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3-v3_1_0.pdf)** 
+
 
 ### 3.进入红包页面方法
 
@@ -156,11 +158,10 @@ RPRedPacketUtil.getInstance().startRedPacket(activity, itemType(见注2), redPac
 
 * **群聊红包redPacketInfo传入参数**
 
-| 参数名称                  | 参数类型                  | 参数说明      | 必填         |
-| --------------------- | --------------------- | --------- | ---------- |
-| toGroupId             | String                | 群组id      | 是          |
-| groupMemberCount      | int                   | 群成员个数     | 是          |
-| RPGroupMemberListener | RPGroupMemberListener | 群成员列表回调接口 | 否**（见注3）** |
+| 参数名称             | 参数类型   | 参数说明  | 必填   |
+| ---------------- | ------ | ----- | ---- |
+| toGroupId        | String | 群组id  | 是    |
+| groupMemberCount | int    | 群成员个数 | 是    |
 
 * **onSendPacketSuccess中RedPacketInfo返回数据说明**
 
@@ -187,6 +188,25 @@ RPRedPacketUtil.getInstance().startRedPacket(activity, itemType(见注2), redPac
 
 **RPGroupMemberListener在使用群专属红包时需要设置，不需要专属红包的开发者，可以不设置该回调函数。**
 
+* **参考示例**
+
+```java
+RedPacket.getInstance().setRPGroupMemberListener(new RPGroupMemberListener() {
+          @Override
+          public void getGroupMember(String groupId, RPValueCallback<List<RPUserBean>> callback) {
+              List<RPUserBean> userBeanList = new ArrayList<RPUserBean>();
+              for (int i = 0; i < groupMembers.size(); i++) {
+                  // RPUserBean中需要设置群成员的id、昵称和头像url(不包含当前用户)
+                  RPUserBean userBean = new RPUserBean();
+                  userBean.userId = "userId";
+                  userBean.userNickname = "nickName";
+                  userBean.userAvatar = "avatarUrl";
+                  userBeanList.add(userBean);
+              }
+              callback.onSuccess(userBeanList);
+          }
+      });
+```
 ### 4.拆红包方法
 
 #### 4.1 拆单聊、群聊、小额随机红包
@@ -231,26 +251,26 @@ RPRedPacketUtil.getInstance().openRedPacket(redPacketInfo, activity, new RPRedPa
 
 **messageDirect为RPConstant.MESSAGE_DIRECT_SEND或RPConstant.MESSAGE_DIRECT_RECEIVE**
 
-#### 4.2 拆广告红包
+#### 4.2 拆营销红包（原广告红包）
 
 ```java
 final ProgressDialog progressDialog = new ProgressDialog(context);
 RPRedPacketUtil.getInstance().openADRedPacket(redPacketId, activity, true, new RPADPacketCallback() {
         @Override
         public void onReceivePacketSuccess(String myAmount) {
-            // 领取广告红包成功，供调用者做统计用
+            // 领取营销红包成功，供调用者做统计用
         }
         @Override
         public void onDetailSuccess(RedPacketInfo data) {
-            // 进入广告详情成功，供调用者做统计用
+            // 进入营销红包详情页面成功，供调用者做统计用
         }
         @Override
         public void shareToFriends(FragmentActivity activity, String shareMsg, String campaignCode) {
-            // 分享给朋友
+            // 分享给朋友，由调用者实现分享到社交平台的功能。
         }
         @Override
         public void loadLandingPage(FragmentActivity activity, String url, String title){
-            // 加载广告链接 
+            // 加载营销链接 
         }
         Override
         public void showLoading() {
@@ -273,13 +293,23 @@ RPRedPacketUtil.getInstance().openADRedPacket(redPacketId, activity, true, new R
 | ----------- | ------------------ | ---------------- |
 | redPacketId | String             | 红包id             |
 | activity    | FragmentActivity   | FragmentActivity |
-| isPlaySound | boolean            | 是否播放拆广告红包声音      |
-| callback    | RPADPacketCallback | 拆广告红包回调接口        |
+| isPlaySound | boolean            | 是否播放拆营销红包声音      |
+| callback    | RPADPacketCallback | 拆营销红包回调接口        |
 
 ### 5.进入红包记录页面
 
+* **方法一**
+
 ```java
+//展示切换收发红包记录的按钮
 RPRedPacketUtil.getInstance().startRecordActivity(context)
+```
+
+* **方法二**
+
+```java
+//第二个参数设置为false,则不展示切换收发红包记录的按钮
+RPRedPacketUtil.getInstance().startRecordActivity(context,false)
 ```
 
 ### 6.增加拆红包音效
