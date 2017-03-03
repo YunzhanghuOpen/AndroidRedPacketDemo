@@ -126,9 +126,8 @@ public class RedPacketUtil {
      */
     public static RedPacketInfo getCurrentUserInfo() {
         RedPacketInfo redPacketInfo = new RedPacketInfo();
-        //红包发送者昵称 不可为空
+        redPacketInfo.fromUserId = sCurrentUserId;
         redPacketInfo.fromNickName = sCurrentNickname;
-        //红包发送者头像url 不可为空
         redPacketInfo.fromAvatarUrl = sCurrentAvatarUrl;
         return redPacketInfo;
     }
