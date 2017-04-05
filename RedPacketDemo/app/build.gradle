@@ -9,6 +9,7 @@ android {
         targetSdkVersion 25
         versionCode 3
         versionName "2.1"
+        resValue "string", "rp_provider_authorities_name", "${applicationId}.redpacket.fileProvider"
     }
     signingConfigs {
 
@@ -42,10 +43,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.yunzhanghu:redpacket:3.4.4'
+    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.4.5'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
-    compile 'com.android.support:design:25.3.0'
-    compile 'com.android.support:support-v4:25.3.0'
-    compile 'com.android.support:recyclerview-v7:25.3.0'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
 }
