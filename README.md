@@ -29,7 +29,7 @@ buildscript {
 
 ```java
 dependencies {
-    compile 'com.yunzhanghu:redpacket:3.4.0@aar'
+    compile 'com.yunzhanghu.redpacket:redpacket:3.4.5'
 }
 ```
 

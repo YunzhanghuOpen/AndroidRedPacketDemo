@@ -11,13 +11,26 @@ android {
         versionName "2.1"
         resValue "string", "rp_provider_authorities_name", "${applicationId}.redpacket.fileProvider"
     }
-    buildTypes {
+    signingConfigs {
+
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file("../keystore.jks")
+            storePassword "123456"
+            keyAlias "yunyu"
+            keyPassword "123456"
         }
     }
+    buildTypes {
 
+        release {
+
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
