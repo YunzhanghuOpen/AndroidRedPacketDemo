@@ -10,7 +10,7 @@
 * 打开红包 
 
 **具体实现可参考Demo中RedPacketUtil中的方法**
-## How to use
+## Usage
 
 ```java
   git clone git@github.com:YunzhanghuOpen/AndroidRedPacketDemo.git
