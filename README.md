@@ -1,7 +1,7 @@
 # AndroidRedPacketDemo
-### Description
+## Description
 
-#### AndroidRedPacketDemo主要演示如何调用相关方法实现红包功能。主要功能如下：
+### AndroidRedPacketDemo主要演示如何调用相关方法实现红包功能。主要功能如下：
 
 * 红包SDK的集成方式（远程依赖aar）
 * 获取签名参数
@@ -15,7 +15,7 @@
 
 ## How to add dependency red packet aar 
 
-###in your top-level build file
+### in your top-level build file
 
 ```java
 buildscript {
@@ -25,11 +25,11 @@ buildscript {
     }
 }
 ```
-###in your module build file
+### in your module build file
 
 ```java
 dependencies {
-    compile 'com.yunzhanghu.redpacket:redpacket:3.4.5'
+    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.4.6'
 }
 ```
 
@@ -39,5 +39,5 @@ dependencies {
 
 
 
-### ScreenShot
+## ScreenShot
 ![image](https://cloud.githubusercontent.com/assets/3954285/21000890/37053ae0-bd58-11e6-8a2f-545e5f867600.png)
