@@ -1,7 +1,7 @@
 # AndroidRedPacketDemo
-### Description
+## Description
 
-#### AndroidRedPacketDemo主要演示如何调用相关方法实现红包功能。主要功能如下：
+### AndroidRedPacketDemo主要演示如何调用相关方法实现红包功能。主要功能如下：
 
 * 红包SDK的集成方式（远程依赖aar）
 * 获取签名参数
