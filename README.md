@@ -6,37 +6,25 @@
 * 红包SDK的集成方式（远程依赖aar）
 * 获取签名参数
 * 进入红包页面（单聊、群聊、小额随机红包）
-* 进入转账页面
-* 进入零钱页面
-* 打开红包  
+* 进入红包记录页面
+* 打开红包 
 
 **具体实现可参考Demo中RedPacketUtil中的方法**
-
-
-## How to add dependency red packet aar 
-
-###in your top-level build file
+## How to use
 
 ```java
-buildscript {
-    repositories {
-        maven { url "https://raw.githubusercontent.com/YunzhanghuOpen/redpacket-maven-repo/master/release" }
-        jcenter()
-    }
-}
+  git clone git@github.com:YunzhanghuOpen/AndroidRedPacketDemo.git
+  
+  cd AndroidRedPacketDemo
+  
+  git checkout alipay
+  
+  cd redpacketui-open 
+  
+  git submodule init
+  
+  git submodule update
 ```
-###in your module build file
-
-```java
-dependencies {
-    compile 'com.yunzhanghu:redpacket:3.4.0@aar'
-}
-```
-
-
-
-
-
 
 
 ### ScreenShot
