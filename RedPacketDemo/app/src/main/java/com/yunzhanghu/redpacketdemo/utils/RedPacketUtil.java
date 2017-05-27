@@ -26,7 +26,7 @@ import static com.yunzhanghu.redpacketdemo.DemoApplication.sToNickname;
 import static com.yunzhanghu.redpacketdemo.DemoApplication.sToUserId;
 
 /**
- * Created by Max on 2016/11/22.
+ * Created by Max on 2016/11/22
  */
 
 public class RedPacketUtil {
@@ -42,24 +42,17 @@ public class RedPacketUtil {
      * 拆红包方法
      *
      * @param activity      FragmentActivity(由于使用了DialogFragment，这个参数类型必须为FragmentActivity)
-     * @param chatType      聊天类型
      * @param redPacketId   红包id
      * @param redPacketType 红包类型
-     * @param receiverId    接收者id
-     * @param messageDirect 消息的方向
      */
-    public static void openRedPacket(final FragmentActivity activity, final int chatType, String redPacketId, String redPacketType, String receiverId, String messageDirect) {
+    public static void openRedPacket(final FragmentActivity activity, String redPacketId, String redPacketType) {
         final ProgressDialog progressDialog = new ProgressDialog(activity);
         progressDialog.setCanceledOnTouchOutside(false);
-        RedPacketInfo redPacketInfo = new RedPacketInfo();
-        redPacketInfo.redPacketId = redPacketId;
-        redPacketInfo.messageDirect = messageDirect;
-        redPacketInfo.chatType = chatType;
-        RPRedPacketUtil.getInstance().openRedPacket(redPacketInfo, activity, new RPRedPacketUtil.RPOpenPacketCallback() {
+        RPRedPacketUtil.getInstance().openRedPacket(redPacketId, redPacketType, activity, new RPRedPacketUtil.RPOpenPacketCallback() {
             @Override
-            public void onSuccess(String senderId, String senderNickname, String myAmount) {
+            public void onSuccess(RedPacketInfo redPacketInfo) {
                 //领取红包成功 发送回执消息到聊天窗口
-                Toast.makeText(activity, "拆红包成功，红包金额" + myAmount + "元", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "拆红包成功，红包金额" + redPacketInfo.myAmount + "元", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -95,7 +88,7 @@ public class RedPacketUtil {
         //项目类型
         if (itemType == RPConstant.RP_ITEM_TYPE_GROUP) {
             //群聊红包传入 ：群组Id和群成员个数
-            redPacketInfo.toGroupId = "testGroupId";
+            redPacketInfo.groupId = "testGroupId";
             redPacketInfo.groupMemberCount = mGroupMemberCount;
             //使用专属红包功能需要设置如下回调函数，不需要可不设置。
             if (isExclusive) {
@@ -111,9 +104,9 @@ public class RedPacketUtil {
             }
         } else {
             //单聊红包、小额随机红包和转账都只传入 ：接收者Id、昵称和头像
-            redPacketInfo.toUserId = sToUserId;
-            redPacketInfo.toNickName = sToNickname;
-            redPacketInfo.toAvatarUrl = sToAvatarUrl;
+            redPacketInfo.receiverId = sToUserId;
+            redPacketInfo.receiverNickname = sToNickname;
+            redPacketInfo.receiverAvatarUrl = sToAvatarUrl;
         }
         return redPacketInfo;
     }
@@ -126,9 +119,9 @@ public class RedPacketUtil {
      */
     public static RedPacketInfo getCurrentUserInfo() {
         RedPacketInfo redPacketInfo = new RedPacketInfo();
-        redPacketInfo.fromUserId = sCurrentUserId;
-        redPacketInfo.fromNickName = sCurrentNickname;
-        redPacketInfo.fromAvatarUrl = sCurrentAvatarUrl;
+        redPacketInfo.currentUserId = sCurrentUserId;
+        redPacketInfo.currentNickname = sCurrentNickname;
+        redPacketInfo.currentAvatarUrl = sCurrentAvatarUrl;
         return redPacketInfo;
     }
 
@@ -161,13 +154,13 @@ public class RedPacketUtil {
         String typeStr = "";
         if (TextUtils.isEmpty(redPacketType)) {
             typeStr = "单聊红包";
-        } else if (redPacketType.equals(RPConstant.GROUP_RED_PACKET_TYPE_RANDOM)) {
+        } else if (redPacketType.equals(RPConstant.RED_PACKET_TYPE_GROUP_RANDOM)) {
             typeStr = "拼手气群红包";
-        } else if (redPacketType.equals(RPConstant.GROUP_RED_PACKET_TYPE_AVERAGE)) {
+        } else if (redPacketType.equals(RPConstant.RED_PACKET_TYPE_GROUP_AVERAGE)) {
             typeStr = "普通群红包";
-        } else if (redPacketType.equals(RPConstant.GROUP_RED_PACKET_TYPE_EXCLUSIVE)) {
+        } else if (redPacketType.equals(RPConstant.RED_PACKET_TYPE_GROUP_EXCLUSIVE)) {
             typeStr = "专属红包";
-        } else if (redPacketType.equals(RPConstant.RED_PACKET_TYPE_RANDOM)) {
+        } else if (redPacketType.equals(RPConstant.RED_PACKET_TYPE_SINGLE_RANDOM)) {
             typeStr = "小额随机红包";
         }
         return typeStr;

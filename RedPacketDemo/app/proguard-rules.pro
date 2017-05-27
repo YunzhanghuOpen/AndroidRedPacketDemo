@@ -23,12 +23,12 @@
  -optimizations !code/simplification/arithmetic,!field/*,!cla
 #支付宝 
 -keep class com.alipay.**{*;}
- -dontwarn com.alipay.** -keep class com.ta.utdid2.**{*;} 
+ -dontwarn com.alipay.** 
+-keep class com.ta.utdid2.**{*;} 
 -keep class com.ut.device.**{*;} 
 -keep class org.json.alipay.**{*;}
  -keepattributes EnclosingMethod 
 
--dontwarn com.tencent.** 
 -keep class org.w3c.dom.**{*;}
  -dontwarn org.w3c.dom.** 
 -keep class java.nio.file.**{*;}
@@ -46,3 +46,4 @@
 # Retrofit
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
+

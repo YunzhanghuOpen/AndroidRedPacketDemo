@@ -1,1 +1,2 @@
-include ':app'
+include ':app',':redpacketui-open'
+project(':redpacketui-open').projectDir = new File('../redpacketui-open')
