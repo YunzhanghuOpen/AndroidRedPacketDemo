@@ -32,7 +32,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.4.6'
+    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.5.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
     compile 'com.android.support:design:25.3.1'

@@ -9,12 +9,12 @@ import android.widget.TextView;
 import com.yunzhanghu.redpacketdemo.R;
 
 /**
- * Created by Max on 2016/12/7.
+ * Created by Max on 2016/12/7
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private String[] mStrArrays = {"单聊红包", "群聊红包", "系统红包", "广告页面", "零钱页面", "联系我们"};
+    private String[] mStrArrays = {"单聊红包", "群聊红包", "系统红包", "广告红包", "零钱页面", "联系我们"};
 
     public RecyclerAdapter() {
     }

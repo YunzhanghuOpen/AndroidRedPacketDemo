@@ -32,8 +32,6 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
 
     private String mRedPacketType = "";
 
-    private int mChatType;
-
     private View mSendPacketLayout;
 
     private View mReceivePacketLayout;
@@ -150,24 +148,19 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
         int itemType = 0;
         switch (view.getId()) {
             case R.id.btn_enter_single_red_packet:
-                mChatType = RPConstant.CHATTYPE_SINGLE;
                 itemType = RPConstant.RP_ITEM_TYPE_SINGLE;
                 break;
             case R.id.btn_enter_random_packet:
-                mChatType = RPConstant.CHATTYPE_SINGLE;
                 itemType = RPConstant.RP_ITEM_TYPE_RANDOM;
                 break;
             case R.id.btn_enter_group_red_packet:
-                mChatType = RPConstant.CHATTYPE_GROUP;
                 itemType = RPConstant.RP_ITEM_TYPE_GROUP;
                 break;
             case R.id.btn_enter_group_p2p_red_packet:
                 isExclusive = true;
-                mChatType = RPConstant.CHATTYPE_GROUP;
                 itemType = RPConstant.RP_ITEM_TYPE_GROUP;
                 break;
             case R.id.btn_enter_transfer_packet:
-                mChatType = RPConstant.CHATTYPE_SINGLE;
                 itemType = RPConstant.RP_ITEM_TYPE_TRANSFER;
                 break;
             case R.id.btn_swap_user:
@@ -175,7 +168,7 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
                 break;
             case R.id.layout_red_packet_send:
             case R.id.layout_red_packet_receive:
-                openRedPacket(this, mChatType, mRedPacketId, mRedPacketType, mReceiverId, mCurrentDirect);
+                openRedPacket(this, mRedPacketId, mRedPacketType, mReceiverId);
                 break;
             case R.id.layout_transfer_send:
             case R.id.layout_transfer_receive:
@@ -187,7 +180,7 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
                 @Override
                 public void onSendPacketSuccess(RedPacketInfo redPacketInfo) {
                     clearMessageBubble();
-                    if (redPacketInfo.redPacketType.equals(RPConstant.RED_PACKET_TYPE_TRANSFER)) {
+                    if (redPacketInfo.redPacketType.equals(RPConstant.RED_PACKET_TYPE_SINGLE_TRANSFER)) {
                         mTransferAmount = redPacketInfo.redPacketAmount;
                         mTransferTime = redPacketInfo.transferTime;
                         showTransferMsg();
@@ -195,8 +188,8 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
                         mRedPacketId = redPacketInfo.redPacketId;
                         mRedPacketType = redPacketInfo.redPacketType;
                         String greetings = redPacketInfo.redPacketGreeting;
-                        mReceiverId = redPacketInfo.toUserId;
-                        String senderNickname = redPacketInfo.fromNickName;
+                        mReceiverId = redPacketInfo.receiverId;
+                        String senderNickname = redPacketInfo.senderNickname;
                         showRedPacketMsg(greetings);
                     }
                 }
@@ -222,7 +215,7 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
         mTvReceiveGreeting.setText(greetings);
         mTvPacketSenderName.setText(sCurrentNickname);
         Glide.with(this).load(sCurrentAvatarUrl).error(R.drawable.default_avatar).placeholder(R.drawable.default_avatar).transform(new CircleTransform(this)).into(mIvPacketSendAvatar);
-        if (mRedPacketType.equals(RPConstant.GROUP_RED_PACKET_TYPE_EXCLUSIVE)) {
+        if (mRedPacketType.equals(RPConstant.RED_PACKET_TYPE_GROUP_EXCLUSIVE)) {
             mTvSendRedPacketType.setVisibility(View.VISIBLE);
         } else {
             mTvSendRedPacketType.setVisibility(View.GONE);
@@ -282,7 +275,7 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
             if (mHasSentRedPacket) {
                 mSendPacketLayout.setVisibility(View.GONE);
                 mReceivePacketLayout.setVisibility(View.VISIBLE);
-                if (mRedPacketType.equals(RPConstant.GROUP_RED_PACKET_TYPE_EXCLUSIVE)) {
+                if (mRedPacketType.equals(RPConstant.RED_PACKET_TYPE_GROUP_EXCLUSIVE)) {
                     mTvReceiveRedPacketType.setVisibility(View.VISIBLE);
                 } else {
                     mTvReceiveRedPacketType.setVisibility(View.GONE);
