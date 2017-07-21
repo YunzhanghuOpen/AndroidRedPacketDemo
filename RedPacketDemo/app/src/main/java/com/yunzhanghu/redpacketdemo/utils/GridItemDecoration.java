@@ -11,7 +11,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 /**
- * Created by Max on 2016/12/7.
+ * Created by Max on 2016/12/7
  */
 
 public class GridItemDecoration extends RecyclerView.ItemDecoration {

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.yunzhanghu.redpacketdemo"
         minSdkVersion 15
@@ -32,7 +32,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.5.0'
+    compile 'com.yunzhanghu.redpacket:redpacket-wallet:3.5.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
     compile 'com.android.support:design:25.3.1'
